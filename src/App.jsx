@@ -1,5 +1,112 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Splash from './pages/Splash/Splash'
+
 const App = () => {
-  return <div>SELA</div>
+  return (
+    <div
+      style={{
+        background: '#0e0e0e',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        style={{
+          position: 'relative',
+          width: '390px',
+          height: '810px',
+          background: '#1a1a1a',
+          borderRadius: '56px',
+          border: '2px solid #333',
+          boxShadow: '0 0 0 8px #111, 0 0 0 10px #333',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Side buttons */}
+        <div
+          style={{
+            position: 'absolute',
+            left: '-12px',
+            top: '140px',
+            width: '4px',
+            height: '36px',
+            background: '#333',
+            borderRadius: '2px',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            left: '-12px',
+            top: '190px',
+            width: '4px',
+            height: '64px',
+            background: '#333',
+            borderRadius: '2px',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            left: '-12px',
+            top: '264px',
+            width: '4px',
+            height: '64px',
+            background: '#333',
+            borderRadius: '2px',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            right: '-12px',
+            top: '190px',
+            width: '4px',
+            height: '80px',
+            background: '#333',
+            borderRadius: '2px',
+          }}
+        />
+
+        {/* Dynamic island */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '16px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '120px',
+            height: '36px',
+            background: '#000',
+            borderRadius: '20px',
+            zIndex: 10,
+          }}
+        />
+
+        {/* Screen */}
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden',
+            position: 'relative',
+            borderRadius: '48px',
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Splash />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default App
