@@ -74,26 +74,31 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .onboarding-logo-icon {
-  height: 28px;
+  height: 24px;
   width: auto;
 }
 
 .onboarding-logo-word {
-  width: 70px;
+  width: 64px;
   height: auto;
 }
 
-.onboarding-skip {
-  color: #6b7280;
+.onboarding-lang {
+  color: #00a7e5;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   cursor: pointer;
+  border: 1px solid rgba(0, 167, 229, 0.3);
+  padding: 4px 10px;
   width: 40px;
-  text-align: right;
+  text-align: center;
 }
 
 .onboarding-illustration {

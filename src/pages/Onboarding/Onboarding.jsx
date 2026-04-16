@@ -47,8 +47,8 @@ const Onboarding = () => {
   const [slides, setSlides] = useState(fallbackSlides)
   const [current, setCurrent] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [lang, setLang] = useState(localStorage.getItem('sela_lang') || 'en')
   const touchStartX = useRef(null)
-  const lang = localStorage.getItem('sela_lang') || 'en'
   const isAr = lang === 'ar'
 
   useEffect(() => {
@@ -66,6 +66,12 @@ const Onboarding = () => {
     }
     fetchSlides()
   }, [])
+
+  const toggleLang = () => {
+    const newLang = isAr ? 'en' : 'ar'
+    localStorage.setItem('sela_lang', newLang)
+    setLang(newLang)
+  }
 
   const goNext = () => {
     if (current < slides.length - 1) setCurrent(current + 1)
@@ -122,12 +128,14 @@ const Onboarding = () => {
         >
           ←
         </span>
+
         <div className='onboarding-logo'>
           <img src={logoicon} alt='' className='onboarding-logo-icon' />
           <img src={logoword} alt='SELA' className='onboarding-logo-word' />
         </div>
-        <span className='onboarding-skip' onClick={() => navigate('/login')}>
-          {isAr ? 'تخطى' : 'SKIP'}
+
+        <span className='onboarding-lang' onClick={toggleLang}>
+          {isAr ? 'EN' : 'AR'}
         </span>
       </div>
 
