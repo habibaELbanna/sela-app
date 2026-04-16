@@ -1,0 +1,182 @@
+.onboarding-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0e0e0e;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.onboarding-container[dir='rtl'] {
+  font-family: Tajawal, sans-serif;
+}
+
+.onboarding-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.onboarding-loading {
+  position: absolute;
+  inset: 0;
+  background: #0e0e0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onboarding-pulse {
+  width: 10px;
+  height: 10px;
+  background: #00a7e5;
+  animation: onboarding-pulse-anim 1s ease-in-out infinite;
+}
+
+@keyframes onboarding-pulse-anim {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.6);
+  }
+}
+
+.onboarding-topbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 56px 24px 16px;
+}
+
+.onboarding-back {
+  color: #b0b0b0;
+  font-size: 20px;
+  cursor: pointer;
+  width: 40px;
+}
+
+.onboarding-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.onboarding-logo-icon {
+  height: 28px;
+  width: auto;
+}
+
+.onboarding-logo-word {
+  width: 70px;
+  height: auto;
+}
+
+.onboarding-skip {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  width: 40px;
+  text-align: right;
+}
+
+.onboarding-illustration {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.onboarding-image {
+  max-width: 72%;
+  max-height: 85%;
+  object-fit: contain;
+}
+
+.onboarding-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding-dots {
+  display: flex;
+  gap: 8px;
+  padding: 0 24px 20px;
+}
+
+.onboarding-dot {
+  height: 8px;
+  width: 8px;
+  background: #6b7280;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.onboarding-dot-active {
+  width: 24px;
+  background: #00a7e5;
+}
+
+.onboarding-content {
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.onboarding-title {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.onboarding-desc {
+  color: #b0b0b0;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.onboarding-btn {
+  margin: 0 24px 40px;
+  height: 56px;
+  background: #141414;
+  border: 1px solid rgba(0, 167, 229, 0.2);
+  color: #00a7e5;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.onboarding-container[dir='rtl'] .onboarding-btn {
+  font-family: Tajawal, sans-serif;
+}
+
+.onboarding-btn:active {
+  opacity: 0.7;
+}

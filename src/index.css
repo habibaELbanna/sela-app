@@ -1,3 +1,18 @@
+:root {
+  --bg: #0e0e0e;
+  --surface-1: #141414;
+  --surface-2: #1a1a1a;
+  --border: rgba(0, 167, 229, 0.2);
+  --blue: #00a7e5;
+  --blue-dim: rgba(0, 167, 229, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #6b7280;
+  --success: #10b981;
+  --warning: #ffa500;
+  --error: #ef4444;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
 
 * {

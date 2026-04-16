@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Splash from './pages/Splash/Splash'
+import Onboarding from './pages/Onboarding/Onboarding'
 
 const App = () => {
   return (
@@ -77,11 +78,11 @@ const App = () => {
         <div
           style={{
             position: 'absolute',
-            top: '16px',
+            top: '10px',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '120px',
-            height: '36px',
+            width: '100px',
+            height: '28px',
             background: '#000',
             borderRadius: '20px',
             zIndex: 10,
@@ -101,6 +102,7 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<Splash />} />
+              <Route path='/onboarding' element={<Onboarding />} />
             </Routes>
           </BrowserRouter>
         </div>
