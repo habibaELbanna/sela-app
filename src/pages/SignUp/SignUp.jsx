@@ -29,23 +29,16 @@ const SignUp = () => {
 
   const handleSignUp = async () => {
     setError('')
-    if (
-      !fullName ||
-      !email ||
-      !phone ||
-      !password ||
-      !confirmPassword ||
-      !selectedRole
-    ) {
-      setError(isAr ? 'جميع الحقول مطلوبة' : 'All fields are required')
+    if (!fullName || !email || !password || !selectedRole) {
+      setError(
+        isAr
+          ? 'يرجى تعبئة الحقول المطلوبة'
+          : 'Please fill in all required fields'
+      )
       return
     }
     if (password !== confirmPassword) {
       setError(isAr ? 'كلمات المرور غير متطابقة' : 'Passwords do not match')
-      return
-    }
-    if (!agreed) {
-      setError(isAr ? 'يجب الموافقة على الشروط' : 'You must agree to the terms')
       return
     }
     setLoading(true)
@@ -155,7 +148,7 @@ const SignUp = () => {
             className='signup-input'
           />
           <input
-            type='email'
+            type='text'
             placeholder='you@company.com'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -169,7 +162,7 @@ const SignUp = () => {
               <option>🇦🇪 +971</option>
             </select>
             <input
-              type='tel'
+              type='text'
               placeholder={isAr ? 'رقم الهاتف' : 'Phone number'}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -242,6 +235,18 @@ const SignUp = () => {
               : isAr
                 ? 'إنشاء حساب'
                 : 'CREATE ACCOUNT'}
+          </button>
+
+          <button
+            className='signup-button-primary'
+            style={{
+              background: '#1a1a1a',
+              border: '1px solid rgba(0,167,229,0.3)',
+              marginTop: 8,
+            }}
+            onClick={() => navigate('/browse-needs')}
+          >
+            SKIP SIGNUP (TEST)
           </button>
         </div>
 

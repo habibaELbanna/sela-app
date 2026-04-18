@@ -25,25 +25,15 @@ const Login = () => {
     setError('')
     setLoading(true)
     try {
-      const { data, error: authError } = await supabase.auth.signInWithPassword(
-        { email, password }
-      )
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
       if (authError) {
         setError(authError.message)
         return
       }
-      const { data: userData, error: userError } = await supabase
-        .from('users')
-        .select('user_type')
-        .eq('id', data.user.id)
-        .single()
-      if (userError || !userData) {
-        setError('User data not found')
-        return
-      }
-      navigate(
-        userData.user_type === 'vendor' ? '/browse-needs' : '/browse-vendors'
-      )
+      navigate('/browse-needs')
     } catch (err) {
       setError(err.message)
     } finally {
@@ -79,7 +69,7 @@ const Login = () => {
 
         <div className='login-form'>
           <input
-            type='email'
+            type='text'
             placeholder='you@company.com'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -136,6 +126,18 @@ const Login = () => {
               : isAr
                 ? 'تسجيل الدخول'
                 : 'SIGN IN'}
+          </button>
+
+          <button
+            className='login-button-primary'
+            style={{
+              background: '#1a1a1a',
+              border: '1px solid rgba(0,167,229,0.3)',
+              marginTop: 8,
+            }}
+            onClick={() => navigate('/browse-needs')}
+          >
+            SKIP LOGIN (TEST)
           </button>
         </div>
 
