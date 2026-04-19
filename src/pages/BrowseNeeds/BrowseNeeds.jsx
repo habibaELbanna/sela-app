@@ -5,10 +5,14 @@ import BottomNav from '../../components/BottomNav/BottomNav'
 import Preloader from '../../components/Preloader/Preloader'
 import './BrowseNeeds.css'
 
+const DEMO_USER_ID = 'a0000000-0000-0000-0000-000000000002'
+
 const BrowseNeeds = () => {
   const navigate = useNavigate()
   const [needs, setNeeds] = useState([])
   const [matchScores, setMatchScores] = useState({})
+  const [savedIds, setSavedIds] = useState(new Set())
+  const [savedAnim, setSavedAnim] = useState({})
   const [loading, setLoading] = useState(true)
   const [activeFilter, setActiveFilter] = useState('all')
   const [sortBy, setSortBy] = useState('best_match')
@@ -37,11 +41,50 @@ const BrowseNeeds = () => {
         setMatchScores(scoresMap)
       }
 
+      const { data: savedData } = await supabase
+        .from('saved_items')
+        .select('entity_id')
+        .eq('user_id', DEMO_USER_ID)
+        .eq('entity_type', 'need')
+
+      if (savedData) {
+        setSavedIds(new Set(savedData.map(s => s.entity_id)))
+      }
+
       setNeeds(needsData || [])
       setLoading(false)
     }
     fetchData()
   }, [])
+
+  const handleSave = async (e, needId) => {
+    e.stopPropagation()
+    const isSaved = savedIds.has(needId)
+    const newSet = new Set(savedIds)
+
+    setSavedAnim(prev => ({ ...prev, [needId]: true }))
+    setTimeout(() => setSavedAnim(prev => ({ ...prev, [needId]: false })), 400)
+
+    if (isSaved) {
+      newSet.delete(needId)
+      setSavedIds(newSet)
+      await supabase.from('saved_items')
+        .delete()
+        .eq('user_id', DEMO_USER_ID)
+        .eq('entity_type', 'need')
+        .eq('entity_id', needId)
+    } else {
+      newSet.add(needId)
+      setSavedIds(newSet)
+      await supabase.from('saved_items').insert([{
+        user_id: DEMO_USER_ID,
+        entity_type: 'need',
+        entity_id: needId,
+        folder_label_en: 'Saved Needs',
+        folder_label_ar: 'الطلبات المحفوظة'
+      }])
+    }
+  }
 
   const filters = [
     { id: 'all', label: isAr ? 'الكل' : 'All' },
@@ -165,6 +208,8 @@ const BrowseNeeds = () => {
             const companyName = isAr ? need.companies?.name_ar : need.companies?.name_en
             const category = isAr ? need.categories?.name_ar : need.categories?.name_en
             const location = isAr ? need.governorates?.name_ar : need.governorates?.name_en
+            const isSaved = savedIds.has(need.id)
+            const isAnim = savedAnim[need.id]
 
             return (
               <div key={need.id} className={`browse-card ${closingSoon ? 'browse-card-has-badge' : ''}`} onClick={() => navigate(`/need/${need.id}`)}>
@@ -244,8 +289,18 @@ const BrowseNeeds = () => {
                     )}
                   </div>
                   <div className='browse-footer-right'>
-                    <button className='browse-save-btn' onClick={(e) => e.stopPropagation()}>
-                      <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
+                    <button
+                      className={`browse-save-btn ${isAnim ? 'browse-save-anim' : ''}`}
+                      onClick={(e) => handleSave(e, need.id)}
+                    >
+                      <svg
+                        width='16'
+                        height='16'
+                        viewBox='0 0 24 24'
+                        fill={isSaved ? '#00a7e5' : 'none'}
+                        stroke={isSaved ? '#00a7e5' : 'currentColor'}
+                        strokeWidth='2'
+                      >
                         <path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'/>
                       </svg>
                     </button>

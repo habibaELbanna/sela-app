@@ -4,6 +4,8 @@ import { supabase } from '../../supabase'
 import Preloader from '../../components/Preloader/Preloader'
 import './NeedDetails.css'
 
+const DEMO_USER_ID = 'a0000000-0000-0000-0000-000000000002'
+
 const AR_MODELS = {
   chair: {
     src: 'https://modelviewer.dev/assets/ShopifyModels/Chair.glb',
@@ -124,6 +126,15 @@ const NeedDetails = () => {
         .limit(3)
       setSimilarNeeds(similarData || [])
 
+      const { data: savedCheck } = await supabase
+        .from('saved_items')
+        .select('id')
+        .eq('user_id', DEMO_USER_ID)
+        .eq('entity_type', 'need')
+        .eq('entity_id', parseInt(id))
+        .maybeSingle()
+      if (savedCheck) setSaved(true)
+
       setLoading(false)
     }
     fetchData()
@@ -158,12 +169,13 @@ const NeedDetails = () => {
   }
 
   const handleSave = async () => {
-    setSaved(!saved)
+    const newSaved = !saved
+    setSaved(newSaved)
     setSaveAnim(true)
     setTimeout(() => setSaveAnim(false), 400)
-    if (!saved) {
+    if (newSaved) {
       await supabase.from('saved_items').insert([{
-        user_id: 'a0000000-0000-0000-0000-000000000002',
+        user_id: DEMO_USER_ID,
         entity_type: 'need',
         entity_id: parseInt(id),
         folder_label_en: 'Saved Needs',
@@ -172,6 +184,7 @@ const NeedDetails = () => {
     } else {
       await supabase.from('saved_items')
         .delete()
+        .eq('user_id', DEMO_USER_ID)
         .eq('entity_type', 'need')
         .eq('entity_id', parseInt(id))
     }
@@ -203,7 +216,7 @@ const NeedDetails = () => {
     })
   }
 
-if (loading) return <Preloader />
+  if (loading) return <Preloader />
   if (!need) return <div className='nd-loading'><p style={{ color: '#b0b0b0' }}>Need not found</p></div>
 
   const title = isAr ? need.title_ar : need.title_en
@@ -296,8 +309,9 @@ if (loading) return <Preloader />
             <div className='nd-company-name-row'>
               <span className='nd-company-name'>{companyName}</span>
               {company?.is_verified && (
-                <svg width='15' height='15' viewBox='0 0 24 24' fill='#00a7e5'>
-                  <path d='M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z'/>
+                <svg width='15' height='15' viewBox='0 0 24 24' fill='none'>
+                  <circle cx='12' cy='12' r='10' fill='#00a7e5'/>
+                  <path d='M8 12l3 3 5-6' stroke='#ffffff' strokeWidth='2.2' strokeLinecap='round' strokeLinejoin='round' fill='none'/>
                 </svg>
               )}
             </div>
@@ -624,7 +638,7 @@ if (loading) return <Preloader />
               </div>
               <div className='nd-arview-hint'>
                 <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#00a7e5' strokeWidth='2'>
-                  <circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/><line x1='11' y1='8' x2='11' y2='14'/><line x1='8' y1='11' x2='11' y2='11'/>
+                  <circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/><line x1='11' y1='8' x2='11' y2='14'/><line x1='8' y1='11' x2='14' y2='11'/>
                 </svg>
                 <span>{isAr ? 'قرّص للتكبير' : 'Pinch to zoom'}</span>
               </div>
