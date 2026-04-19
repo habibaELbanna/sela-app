@@ -6,6 +6,7 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import SignUp from './pages/SignUp/SignUp'
 import BrowseNeeds from './pages/BrowseNeeds/BrowseNeeds'
 import NeedDetails from './pages/NeedDetails/NeedDetails'
+import ChatThread from './pages/ChatThread/ChatThread'
 
 const App = () => {
   return (
@@ -113,6 +114,8 @@ const App = () => {
               <Route path='/signup' element={<SignUp />} />
               <Route path='/browse-needs' element={<BrowseNeeds />} />
               <Route path='/need/:id' element={<NeedDetails />} />
+              <Route path="/messages/new" element={<ChatThread />} />
+<Route path="/messages/:id" element={<ChatThread />} />
             </Routes>
           </BrowserRouter>
         </div>

@@ -181,6 +181,27 @@ const NeedDetails = () => {
     setArModel({ ...picked, fileName: attachment.file_name })
   }
 
+  const handleContactBuyer = () => {
+    if (!need || !company) return
+    const t = isAr ? need.title_ar : need.title_en
+    const cName = isAr ? company.name_ar : company.name_en
+    navigate(`/messages/new?need=${need.id}`, {
+      state: {
+        needId: need.id,
+        needTitle: t,
+        needTitleEn: need.title_en,
+        needTitleAr: need.title_ar,
+        buyerCompanyId: company.id,
+        buyerCompanyName: cName,
+        buyerCompanyNameEn: company.name_en,
+        buyerCompanyNameAr: company.name_ar,
+        buyerLogoUrl: company.logo_url,
+        buyerIsVerified: company.is_verified,
+        fromNeed: true
+      }
+    })
+  }
+
   if (loading) return <div className='nd-loading'><div className='nd-pulse' /></div>
   if (!need) return <div className='nd-loading'><p style={{ color: '#b0b0b0' }}>Need not found</p></div>
 
@@ -513,7 +534,7 @@ const NeedDetails = () => {
       </div>
 
       <div className='nd-contact-bar'>
-        <button className='nd-contact-btn' onClick={() => navigate('/messages')}>
+        <button className='nd-contact-btn' onClick={handleContactBuyer}>
           <svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
             <path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/>
           </svg>
@@ -602,7 +623,7 @@ const NeedDetails = () => {
               </div>
               <div className='nd-arview-hint'>
                 <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#00a7e5' strokeWidth='2'>
-                  <circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/><line x1='11' y1='8' x2='11' y2='14'/><line x1='8' y1='11' x2='14' y2='11'/>
+                  <circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/><line x1='11' y1='8' x2='11' y2='14'/><line x1='8' y1='11' x2='11' y2='11'/>
                 </svg>
                 <span>{isAr ? 'قرّص للتكبير' : 'Pinch to zoom'}</span>
               </div>
