@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../supabase'
+import Preloader from '../../components/Preloader/Preloader'
 import './NeedDetails.css'
 
 const AR_MODELS = {
@@ -202,7 +203,7 @@ const NeedDetails = () => {
     })
   }
 
-  if (loading) return <div className='nd-loading'><div className='nd-pulse' /></div>
+if (loading) return <Preloader />
   if (!need) return <div className='nd-loading'><p style={{ color: '#b0b0b0' }}>Need not found</p></div>
 
   const title = isAr ? need.title_ar : need.title_en

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../supabase'
 import BottomNav from '../../components/BottomNav/BottomNav'
+import Preloader from '../../components/Preloader/Preloader'
 import './BrowseNeeds.css'
 
 const BrowseNeeds = () => {
@@ -90,13 +91,7 @@ const BrowseNeeds = () => {
     return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2)
   }
 
-  if (loading) {
-    return (
-      <div className='browse-loading'>
-        <div className='browse-pulse' />
-      </div>
-    )
-  }
+  if (loading) return <Preloader />
 
   const filteredNeeds = getFilteredNeeds()
 
@@ -174,9 +169,9 @@ const BrowseNeeds = () => {
             return (
               <div key={need.id} className={`browse-card ${closingSoon ? 'browse-card-has-badge' : ''}`} onClick={() => navigate(`/need/${need.id}`)}>
 
-             {closingSoon && (
-  <img src={require('../../Assets/badge.svg').default} alt='Closing Soon' className='browse-badge-closing' />
-)}
+                {closingSoon && (
+                  <img src={require('../../Assets/badge.svg').default} alt='Closing Soon' className='browse-badge-closing' />
+                )}
 
                 <div className='browse-card-top'>
                   <div className='browse-company-row'>

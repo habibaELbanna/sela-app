@@ -1,0 +1,64 @@
+.sela-pre__wrap {
+  position: absolute;
+  inset: 0;
+  background: #0e0e0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+}
+
+.sela-pre__wrap--out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sela-pre__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.sela-pre__logo-wrap {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.sela-pre__logo-wrap--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sela-pre__bird-wrap {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: sela-pre__birdEnter 0.6s ease forwards;
+}
+
+@keyframes sela-pre__birdEnter {
+  from { opacity: 0; bottom: -60px; transform: translateX(-50%) scale(0.5); }
+  to   { opacity: 1; bottom: -20px; transform: translateX(-50%) scale(1); }
+}
+
+.sela-pre__bird-wrap--fly {
+  animation: sela-pre__birdFly 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes sela-pre__birdFly {
+  0%   { opacity: 1; bottom: -20px; left: 50%; transform: translateX(-50%) scale(1) rotate(0deg); }
+  30%  { opacity: 1; bottom: 40px;  left: 55%; transform: translateX(-50%) scale(1.1) rotate(-5deg); }
+  60%  { opacity: 1; bottom: 80px;  left: 70%; transform: translateX(-50%) scale(0.9) rotate(-8deg); }
+  85%  { opacity: 0.6; bottom: 120px; left: 100%; transform: translateX(-50%) scale(0.7) rotate(-10deg); }
+  100% { opacity: 0; bottom: 150px;  left: 130%; transform: translateX(-50%) scale(0.4) rotate(-12deg); }
+}
+
+.sela-pre__bird-svg {
+  filter: drop-shadow(0 0 12px rgba(0, 167, 229, 0.6));
+}
