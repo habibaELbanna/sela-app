@@ -5,6 +5,7 @@ import Login from './pages/Login/Login'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import SignUp from './pages/SignUp/SignUp'
 import BrowseNeeds from './pages/BrowseNeeds/BrowseNeeds'
+import NeedDetails from './pages/NeedDetails/NeedDetails'
 
 const App = () => {
   return (
@@ -111,6 +112,7 @@ const App = () => {
               <Route path='/forgot-password' element={<ForgotPassword />} />
               <Route path='/signup' element={<SignUp />} />
               <Route path='/browse-needs' element={<BrowseNeeds />} />
+              <Route path='/need/:id' element={<NeedDetails />} />
             </Routes>
           </BrowserRouter>
         </div>
