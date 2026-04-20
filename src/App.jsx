@@ -17,6 +17,7 @@ import Settings from './pages/Settings/Settings'
 import MessagesList from './pages/MessagesList/MessagesList'
 import Notifications from './pages/Notifications/Notifications'
 import SearchFilters from './pages/SearchFilters/SearchFilters'
+import MyProposals from './pages/MyProposals/MyProposals'
 
 const App = () => {
   return (
@@ -139,6 +140,7 @@ const App = () => {
                 element={<Notifications />}
               />
               <Route path='/search' element={<SearchFilters />} />
+              <Route path='/my-proposals' element={<MyProposals />} />
             </Routes>
           </BrowserRouter>
         </div>
