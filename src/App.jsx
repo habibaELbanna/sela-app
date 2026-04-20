@@ -16,6 +16,7 @@ import VendorProfile from './pages/VendorProfile/VendorProfile'
 import Settings from './pages/Settings/Settings'
 import MessagesList from './pages/MessagesList/MessagesList'
 import Notifications from './pages/Notifications/Notifications'
+import SearchFilters from './pages/SearchFilters/SearchFilters'
 
 const App = () => {
   return (
@@ -137,6 +138,7 @@ const App = () => {
                 path='/profile/notifications'
                 element={<Notifications />}
               />
+              <Route path='/search' element={<SearchFilters />} />
             </Routes>
           </BrowserRouter>
         </div>
