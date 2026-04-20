@@ -14,6 +14,8 @@ import BrowseVendors from './pages/BrowseVendors/BrowseVendors'
 import DiscoverVendors from './pages/DiscoverVendors/DiscoverVendors'
 import VendorProfile from './pages/VendorProfile/VendorProfile'
 import Settings from './pages/Settings/Settings'
+import MessagesList from './pages/MessagesList/MessagesList'
+import Notifications from './pages/Notifications/Notifications'
 
 const App = () => {
   return (
@@ -130,6 +132,11 @@ const App = () => {
               <Route path='/discover-vendors' element={<DiscoverVendors />} />
               <Route path='/vendor/:id' element={<VendorProfile />} />
               <Route path='/profile/settings' element={<Settings />} />
+              <Route path='/messages' element={<MessagesList />} />
+              <Route
+                path='/profile/notifications'
+                element={<Notifications />}
+              />
             </Routes>
           </BrowserRouter>
         </div>

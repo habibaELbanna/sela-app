@@ -89,6 +89,7 @@ const ChatThread = () => {
   const [typing, setTyping] = useState(false)
   const [loading, setLoading] = useState(!other)
   const [showContextCard, setShowContextCard] = useState(true)
+  const [showMenu, setShowMenu] = useState(false)
   const scrollRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -326,22 +327,105 @@ const ChatThread = () => {
           </div>
         </div>
 
-        <button className='ct-icon-btn'>
-          <svg
-            width='20'
-            height='20'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
+        <div className='ct-menu-wrap'>
+          <button
+            className='ct-icon-btn'
+            onClick={() => setShowMenu(!showMenu)}
           >
-            <circle cx='12' cy='12' r='1' />
-            <circle cx='12' cy='5' r='1' />
-            <circle cx='12' cy='19' r='1' />
-          </svg>
-        </button>
+            <svg
+              width='20'
+              height='20'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+            >
+              <circle cx='12' cy='12' r='1' />
+              <circle cx='12' cy='5' r='1' />
+              <circle cx='12' cy='19' r='1' />
+            </svg>
+          </button>
+
+          {showMenu && (
+            <>
+              <div
+                className='ct-menu-backdrop'
+                onClick={() => setShowMenu(false)}
+              />
+              <div className='ct-menu-dropdown'>
+                <button
+                  className='ct-menu-item'
+                  onClick={() => {
+                    setShowMenu(false)
+                    if (other) navigate(`/vendor/${other.id}`)
+                  }}
+                >
+                  <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  >
+                    <path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2' />
+                    <circle cx='12' cy='7' r='4' />
+                  </svg>
+                  <span>{isAr ? 'عرض الملف الشخصي' : 'View Profile'}</span>
+                </button>
+                <button
+                  className='ct-menu-item'
+                  onClick={() => {
+                    setShowMenu(false)
+                    alert(isAr ? 'تم حظر المستخدم' : 'User blocked')
+                  }}
+                >
+                  <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  >
+                    <circle cx='12' cy='12' r='10' />
+                    <line x1='4.93' y1='4.93' x2='19.07' y2='19.07' />
+                  </svg>
+                  <span>{isAr ? 'حظر' : 'Block'}</span>
+                </button>
+                <button
+                  className='ct-menu-item ct-menu-item-danger'
+                  onClick={() => {
+                    setShowMenu(false)
+                    alert(isAr ? 'تم الإبلاغ' : 'Reported')
+                  }}
+                >
+                  <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='#EF4444'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  >
+                    <path d='M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z' />
+                    <line x1='12' y1='9' x2='12' y2='13' />
+                    <line x1='12' y1='17' x2='12.01' y2='17' />
+                  </svg>
+                  <span>{isAr ? 'إبلاغ' : 'Report'}</span>
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {need && showContextCard && (
