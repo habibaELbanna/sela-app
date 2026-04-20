@@ -58,8 +58,8 @@ const ForgotPassword = () => {
           </button>
 
           <div className='forgot-logo'>
-            <img src={logoicon} alt='' className='forgot-logo-icon' />
             <img src={logoword} alt='SELA' className='forgot-logo-word' />
+            <img src={logoicon} alt='' className='forgot-logo-icon' />
           </div>
 
           <div className='forgot-topbar-spacer' />

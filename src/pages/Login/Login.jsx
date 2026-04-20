@@ -21,24 +21,52 @@ const Login = () => {
 
   const isAr = localStorage.getItem('sela_lang') === 'ar'
 
+  const routeByUserType = (userType) => {
+    localStorage.setItem('sela_user_type', userType)
+    if (userType === 'buyer') {
+      navigate('/browse-vendors')
+    } else {
+      navigate('/browse-needs')
+    }
+  }
+
   const handleSignIn = async () => {
     setError('')
     setLoading(true)
     try {
-      const { error: authError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
+      const { data: authData, error: authError } =
+        await supabase.auth.signInWithPassword({
+          email,
+          password,
+        })
       if (authError) {
         setError(authError.message)
         return
       }
-      navigate('/browse-needs')
+
+      const userId = authData?.user?.id
+      if (!userId) {
+        setError(isAr ? 'خطأ في المصادقة' : 'Authentication error')
+        return
+      }
+
+      const { data: userData } = await supabase
+        .from('users')
+        .select('user_type')
+        .eq('id', userId)
+        .single()
+
+      const userType = userData?.user_type || 'vendor'
+      routeByUserType(userType)
     } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
     }
+  }
+
+  const skipAs = (userType) => {
+    routeByUserType(userType)
   }
 
   return (
@@ -54,8 +82,8 @@ const Login = () => {
       <img src={bgImage} alt='' className='login-bg' />
       <div className='login-content'>
         <div className='login-logo'>
-          <img src={logoicon} alt='' className='login-logo-icon' />
           <img src={logoword} alt='SELA' className='login-logo-word' />
+          <img src={logoicon} alt='' className='login-logo-icon' />
         </div>
 
         <div className='login-header'>
@@ -128,17 +156,32 @@ const Login = () => {
                 : 'SIGN IN'}
           </button>
 
-          <button
-            className='login-button-primary'
-            style={{
-              background: '#1a1a1a',
-              border: '1px solid rgba(0,167,229,0.3)',
-              marginTop: 8,
-            }}
-            onClick={() => navigate('/browse-needs')}
-          >
-            SKIP LOGIN (TEST)
-          </button>
+          <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+            <button
+              className='login-button-primary'
+              style={{
+                flex: 1,
+                background: '#1a1a1a',
+                border: '1px solid rgba(0,167,229,0.3)',
+                fontSize: 11,
+              }}
+              onClick={() => skipAs('vendor')}
+            >
+              SKIP AS VENDOR
+            </button>
+            <button
+              className='login-button-primary'
+              style={{
+                flex: 1,
+                background: '#1a1a1a',
+                border: '1px solid rgba(0,167,229,0.3)',
+                fontSize: 11,
+              }}
+              onClick={() => skipAs('buyer')}
+            >
+              SKIP AS BUYER
+            </button>
+          </div>
         </div>
 
         <div className='login-divider'>

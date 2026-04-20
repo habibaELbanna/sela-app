@@ -10,6 +10,7 @@ import ChatThread from './pages/ChatThread/ChatThread'
 import Profile from './pages/Profile/Profile'
 import EditProfile from './pages/EditProfile/EditProfile'
 import DiscoverNeeds from './pages/DiscoverNeeds/DiscoverNeeds'
+import BrowseVendors from './pages/BrowseVendors/BrowseVendors'
 
 const App = () => {
   return (
@@ -122,6 +123,7 @@ const App = () => {
               <Route path='/profile' element={<Profile />} />
               <Route path='/profile/edit' element={<EditProfile />} />
               <Route path='/discover-needs' element={<DiscoverNeeds />} />
+              <Route path='/browse-vendors' element={<BrowseVendors />} />
             </Routes>
           </BrowserRouter>
         </div>

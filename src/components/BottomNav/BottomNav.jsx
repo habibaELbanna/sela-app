@@ -6,44 +6,94 @@ const BottomNav = ({ userType }) => {
   const location = useLocation()
   const path = location.pathname
 
+  const resolvedType =
+    userType || localStorage.getItem('sela_user_type') || 'vendor'
+  const isAr = localStorage.getItem('sela_lang') === 'ar'
+
   const vendorTabs = [
-    { label: 'Browse', path: '/browse-needs', icon: 'grid' },
-    { label: 'Discover', path: '/discover-needs', icon: 'compass' },
-    { label: 'Messages', path: '/messages', icon: 'chat' },
-    { label: 'Profile', path: '/profile', icon: 'person' },
+    { label: isAr ? 'تصفح' : 'Browse', path: '/browse-needs', icon: 'grid' },
+    {
+      label: isAr ? 'اكتشف' : 'Discover',
+      path: '/discover-needs',
+      icon: 'compass',
+    },
+    { label: isAr ? 'الرسائل' : 'Messages', path: '/messages', icon: 'chat' },
+    { label: isAr ? 'الملف' : 'Profile', path: '/profile', icon: 'person' },
   ]
 
   const buyerTabs = [
-    { label: 'Browse', path: '/browse-vendors', icon: 'grid' },
-    { label: 'Discover', path: '/discover-vendors', icon: 'compass' },
-    { label: 'Messages', path: '/messages', icon: 'chat' },
-    { label: 'Profile', path: '/profile', icon: 'person' },
+    { label: isAr ? 'تصفح' : 'Browse', path: '/browse-vendors', icon: 'grid' },
+    {
+      label: isAr ? 'اكتشف' : 'Discover',
+      path: '/discover-vendors',
+      icon: 'compass',
+    },
+    { label: isAr ? 'الرسائل' : 'Messages', path: '/messages', icon: 'chat' },
+    { label: isAr ? 'الملف' : 'Profile', path: '/profile', icon: 'person' },
   ]
 
-  const tabs = userType === 'buyer' ? buyerTabs : vendorTabs
+  const tabs = resolvedType === 'buyer' ? buyerTabs : vendorTabs
 
   const icons = {
     grid: (
-      <svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
-        <rect x='3' y='3' width='7' height='7'/><rect x='14' y='3' width='7' height='7'/>
-        <rect x='3' y='14' width='7' height='7'/><rect x='14' y='14' width='7' height='7'/>
+      <svg
+        width='22'
+        height='22'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      >
+        <rect x='3' y='3' width='7' height='7' />
+        <rect x='14' y='3' width='7' height='7' />
+        <rect x='3' y='14' width='7' height='7' />
+        <rect x='14' y='14' width='7' height='7' />
       </svg>
     ),
     compass: (
-      <svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
-        <circle cx='12' cy='12' r='10'/>
-        <polygon points='16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76'/>
+      <svg
+        width='22'
+        height='22'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      >
+        <circle cx='12' cy='12' r='10' />
+        <polygon points='16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76' />
       </svg>
     ),
     chat: (
-      <svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
-        <path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/>
+      <svg
+        width='22'
+        height='22'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      >
+        <path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' />
       </svg>
     ),
     person: (
-      <svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2'>
-        <path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/>
-        <circle cx='12' cy='7' r='4'/>
+      <svg
+        width='22'
+        height='22'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      >
+        <path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2' />
+        <circle cx='12' cy='7' r='4' />
       </svg>
     ),
   }
@@ -51,7 +101,10 @@ const BottomNav = ({ userType }) => {
   return (
     <div className='bottom-nav'>
       {tabs.map((tab) => {
-        const active = path === tab.path
+        const active =
+          path === tab.path ||
+          (tab.path === '/messages' && path.startsWith('/messages')) ||
+          (tab.path === '/profile' && path.startsWith('/profile'))
         return (
           <button
             key={tab.path}

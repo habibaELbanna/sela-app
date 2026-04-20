@@ -103,8 +103,8 @@ const SignUp = () => {
     >
       <div className='signup-content'>
         <div className='signup-logo'>
-          <img src={logoicon} alt='' className='signup-logo-icon' />
           <img src={logoword} alt='SELA' className='signup-logo-word' />
+          <img src={logoicon} alt='' className='signup-logo-icon' />
         </div>
 
         <h1 className='signup-headline'>
