@@ -12,6 +12,7 @@ import EditProfile from './pages/EditProfile/EditProfile'
 import DiscoverNeeds from './pages/DiscoverNeeds/DiscoverNeeds'
 import BrowseVendors from './pages/BrowseVendors/BrowseVendors'
 import DiscoverVendors from './pages/DiscoverVendors/DiscoverVendors'
+import VendorProfile from './pages/VendorProfile/VendorProfile'
 
 const App = () => {
   return (
@@ -126,6 +127,7 @@ const App = () => {
               <Route path='/discover-needs' element={<DiscoverNeeds />} />
               <Route path='/browse-vendors' element={<BrowseVendors />} />
               <Route path='/discover-vendors' element={<DiscoverVendors />} />
+              <Route path='/vendor/:id' element={<VendorProfile />} />
             </Routes>
           </BrowserRouter>
         </div>
