@@ -405,17 +405,18 @@ const NeedDetails = () => {
           </button>
         </div>
 
-        <div className='nd-section'>
-          <h2 className='nd-section-title'>{isAr ? 'المتطلبات' : 'Requirements'}</h2>
-          {requirements.map((req, i) => (
-            <div key={i} className='nd-requirement'>
-              <svg width='16' height='16' viewBox='0 0 24 24' fill='#00a7e5'>
-                <path d='M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z'/>
-              </svg>
-              <span>{req}</span>
-            </div>
-          ))}
-        </div>
+    <div className='nd-section'>
+  <h2 className='nd-section-title'>{isAr ? 'المتطلبات' : 'Requirements'}</h2>
+  {requirements.map((req, i) => (
+    <div key={i} className='nd-requirement'>
+      <svg width='18' height='18' viewBox='0 0 24 24' fill='none'>
+        <circle cx='12' cy='12' r='10' fill='#00a7e5'/>
+        <path d='M8 12l3 3 5-6' stroke='#ffffff' strokeWidth='2.2' strokeLinecap='round' strokeLinejoin='round' fill='none'/>
+      </svg>
+      <span>{req}</span>
+    </div>
+  ))}
+</div>
 
         <div className='nd-section'>
           <h2 className='nd-section-title'>{isAr ? 'المواصفات التقنية' : 'Technical Specifications'}</h2>

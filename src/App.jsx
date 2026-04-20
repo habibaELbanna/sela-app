@@ -9,6 +9,7 @@ import NeedDetails from './pages/NeedDetails/NeedDetails'
 import ChatThread from './pages/ChatThread/ChatThread'
 import Profile from './pages/Profile/Profile'
 import EditProfile from './pages/EditProfile/EditProfile'
+import DiscoverNeeds from './pages/DiscoverNeeds/DiscoverNeeds'
 
 const App = () => {
   return (
@@ -116,10 +117,11 @@ const App = () => {
               <Route path='/signup' element={<SignUp />} />
               <Route path='/browse-needs' element={<BrowseNeeds />} />
               <Route path='/need/:id' element={<NeedDetails />} />
-              <Route path="/messages/new" element={<ChatThread />} />
-<Route path="/messages/:id" element={<ChatThread />} />
-<Route path='/profile' element={<Profile />} />
-<Route path='/profile/edit' element={<EditProfile />} />
+              <Route path='/messages/new' element={<ChatThread />} />
+              <Route path='/messages/:id' element={<ChatThread />} />
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/profile/edit' element={<EditProfile />} />
+              <Route path='/discover-needs' element={<DiscoverNeeds />} />
             </Routes>
           </BrowserRouter>
         </div>
