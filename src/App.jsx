@@ -11,6 +11,7 @@ import Profile from './pages/Profile/Profile'
 import EditProfile from './pages/EditProfile/EditProfile'
 import DiscoverNeeds from './pages/DiscoverNeeds/DiscoverNeeds'
 import BrowseVendors from './pages/BrowseVendors/BrowseVendors'
+import DiscoverVendors from './pages/DiscoverVendors/DiscoverVendors'
 
 const App = () => {
   return (
@@ -124,6 +125,7 @@ const App = () => {
               <Route path='/profile/edit' element={<EditProfile />} />
               <Route path='/discover-needs' element={<DiscoverNeeds />} />
               <Route path='/browse-vendors' element={<BrowseVendors />} />
+              <Route path='/discover-vendors' element={<DiscoverVendors />} />
             </Routes>
           </BrowserRouter>
         </div>
