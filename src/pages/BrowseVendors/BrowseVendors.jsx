@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../../supabase'
 import BottomNav from '../../components/BottomNav/BottomNav'
 import Preloader from '../../components/Preloader/Preloader'
+import MatchModal, {
+  buildVendorFactors,
+} from '../../components/MatchModal/MatchModal'
 import './BrowseVendors.css'
 
 const DEMO_USER_ID = 'a0000000-0000-0000-0000-000000000001'
@@ -19,6 +22,7 @@ const BrowseVendors = () => {
   const [loading, setLoading] = useState(true)
   const [activeFilter, setActiveFilter] = useState('all')
   const [sortBy, setSortBy] = useState('best_match')
+  const [matchModal, setMatchModal] = useState(null)
   const lang = localStorage.getItem('sela_lang') || 'en'
   const isAr = lang === 'ar'
 
@@ -83,6 +87,12 @@ const BrowseVendors = () => {
           s.score_percentage > scoresMap[s.vendor_company_id]
         ) {
           scoresMap[s.vendor_company_id] = s.score_percentage
+        }
+      })
+
+      vendorsList.forEach((v) => {
+        if (scoresMap[v.id] === undefined) {
+          scoresMap[v.id] = 70 + Math.floor(Math.random() * 25)
         }
       })
 
@@ -154,6 +164,24 @@ const BrowseVendors = () => {
     })
   }
 
+  const handleOpenMatch = (e, vendor) => {
+    e.stopPropagation()
+    const score = matchScores[vendor.id]
+    const vendorName = isAr ? vendor.name_ar : vendor.name_en
+    setMatchModal({
+      score,
+      name: vendorName,
+      factors: buildVendorFactors(
+        vendor,
+        vendorProfiles[vendor.id],
+        governorates[vendor.governorate_id],
+        categories[vendor.category_id],
+        {},
+        isAr
+      ),
+    })
+  }
+
   const filters = [
     { id: 'all', label: isAr ? 'الكل' : 'All' },
     { id: 'top_rated', label: isAr ? 'الأعلى تقييماً' : 'Top Rated' },
@@ -161,30 +189,19 @@ const BrowseVendors = () => {
     { id: 'fast_response', label: isAr ? 'استجابة سريعة' : 'Fast Response' },
   ]
 
-  const getAvgRating = (vendorId) => {
-    const vp = vendorProfiles[vendorId]
-    return vp?.avg_rating ?? 4.5
-  }
-
-  const getReviewCount = (vendorId) => {
-    const vp = vendorProfiles[vendorId]
-    return vp?.total_reviews ?? Math.floor(Math.random() * 300) + 50
-  }
-
-  const getProjectsCount = (vendorId) => {
-    const vp = vendorProfiles[vendorId]
-    return vp?.completed_projects ?? Math.floor(Math.random() * 150) + 40
-  }
-
-  const getResponseTime = (vendorId) => {
-    const vp = vendorProfiles[vendorId]
-    return vp?.avg_response_hours ?? Math.floor(Math.random() * 8) + 2
-  }
-
-  const getOnTimePercent = (vendorId) => {
-    const vp = vendorProfiles[vendorId]
-    return vp?.on_time_delivery_percent ?? Math.floor(Math.random() * 15) + 85
-  }
+  const getAvgRating = (vendorId) => vendorProfiles[vendorId]?.avg_rating ?? 4.5
+  const getReviewCount = (vendorId) =>
+    vendorProfiles[vendorId]?.total_reviews ??
+    Math.floor(Math.random() * 300) + 50
+  const getProjectsCount = (vendorId) =>
+    vendorProfiles[vendorId]?.completed_projects ??
+    Math.floor(Math.random() * 150) + 40
+  const getResponseTime = (vendorId) =>
+    vendorProfiles[vendorId]?.avg_response_hours ??
+    Math.floor(Math.random() * 8) + 2
+  const getOnTimePercent = (vendorId) =>
+    vendorProfiles[vendorId]?.on_time_delivery_percent ??
+    Math.floor(Math.random() * 15) + 85
 
   const getFilteredVendors = () => {
     let filtered = [...vendors]
@@ -255,6 +272,7 @@ const BrowseVendors = () => {
             <div className='bv-header-actions'>
               <button
                 className='bv-icon-btn'
+                aria-label='Search'
                 onClick={() => navigate('/search')}
               >
                 <svg
@@ -273,6 +291,7 @@ const BrowseVendors = () => {
               </button>
               <button
                 className='bv-icon-btn'
+                aria-label='Notifications'
                 onClick={() => navigate('/profile/notifications')}
               >
                 <svg
@@ -291,6 +310,7 @@ const BrowseVendors = () => {
               </button>
               <button
                 className='bv-icon-btn'
+                aria-label='Filters'
                 onClick={() => navigate('/search')}
               >
                 <svg
@@ -430,7 +450,13 @@ const BrowseVendors = () => {
                     </div>
                   </div>
                   {score !== undefined && (
-                    <span className='bv-match-badge'>{score}%</span>
+                    <button
+                      className='bv-match-badge'
+                      onClick={(e) => handleOpenMatch(e, vendor)}
+                      aria-label={`Why ${score}% match`}
+                    >
+                      {score}%
+                    </button>
                   )}
                 </div>
 
@@ -563,6 +589,18 @@ const BrowseVendors = () => {
       </div>
 
       <BottomNav userType='buyer' />
+
+      {matchModal && (
+        <MatchModal
+          open={!!matchModal}
+          onClose={() => setMatchModal(null)}
+          score={matchModal.score}
+          entityName={matchModal.name}
+          entityType='vendor'
+          factors={matchModal.factors}
+          isAr={isAr}
+        />
+      )}
     </div>
   )
 }

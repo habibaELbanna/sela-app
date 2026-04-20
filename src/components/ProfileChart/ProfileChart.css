@@ -1,0 +1,132 @@
+.pch-wrap {
+  background: #0e0e0e;
+  border: 1px solid rgba(0, 167, 229, 0.3);
+  border-radius: 0;
+  padding: 14px 14px 10px;
+  margin: 0 0 16px 0;
+  min-height: 260px;
+  overflow: hidden;
+}
+
+.pch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.pch-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pch-title {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pch-sub {
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.pch-stats {
+  display: flex;
+  gap: 14px;
+}
+
+.pch-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.pch-stat-value {
+  color: #00a7e5;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.pch-stat-green {
+  color: #10b981;
+}
+
+.pch-stat-label {
+  color: #6b7280;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pch-chart {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  user-select: none;
+}
+
+.pch-chart .recharts-cartesian-axis-tick text {
+  fill: #6b7280;
+}
+
+.pch-tooltip {
+  background: #1a1a1a;
+  border: 1px solid rgba(0, 167, 229, 0.4);
+  border-radius: 0;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.pch-tooltip-label {
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.pch-tooltip-row {
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.pch-tooltip-row strong {
+  color: inherit;
+  margin-left: 3px;
+}
+
+.pch-legend {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 4px;
+}
+
+.pch-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pch-legend-dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+
+.pch-legend-label {
+  color: #b0b0b0;
+  font-size: 11px;
+}

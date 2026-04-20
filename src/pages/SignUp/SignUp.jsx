@@ -16,6 +16,7 @@ const SignUp = () => {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [countryCode, setCountryCode] = useState('+20')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [selectedRole, setSelectedRole] = useState('')
@@ -27,46 +28,110 @@ const SignUp = () => {
 
   const isAr = localStorage.getItem('sela_lang') === 'ar'
 
-  const handleSignUp = async () => {
+  const validateEmail = (em) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)
+
+  const validatePassword = (pw) => {
+    if (pw.length < 8)
+      return isAr
+        ? 'كلمة المرور يجب أن تكون 8 أحرف على الأقل'
+        : 'Password must be at least 8 characters'
+    return null
+  }
+
+  const handleSignUp = async (e) => {
+    e?.preventDefault()
     setError('')
-    if (!fullName || !email || !password || !selectedRole) {
+
+    if (!selectedRole) {
       setError(
         isAr
-          ? 'يرجى تعبئة الحقول المطلوبة'
-          : 'Please fill in all required fields'
+          ? 'يرجى اختيار نوع الحساب (مشتري أو مورد)'
+          : 'Please select account type (Buyer or Vendor)'
       )
+      return
+    }
+    if (!fullName.trim()) {
+      setError(isAr ? 'يرجى إدخال الاسم الكامل' : 'Please enter your full name')
+      return
+    }
+    if (!validateEmail(email)) {
+      setError(
+        isAr ? 'يرجى إدخال بريد إلكتروني صالح' : 'Please enter a valid email'
+      )
+      return
+    }
+    const pwError = validatePassword(password)
+    if (pwError) {
+      setError(pwError)
       return
     }
     if (password !== confirmPassword) {
       setError(isAr ? 'كلمات المرور غير متطابقة' : 'Passwords do not match')
       return
     }
+    if (!agreed) {
+      setError(
+        isAr
+          ? 'يرجى الموافقة على الشروط وسياسة الخصوصية'
+          : 'Please agree to the Terms and Privacy Policy'
+      )
+      return
+    }
+
     setLoading(true)
     try {
+      const fullPhone = phone
+        ? `${countryCode}${phone.replace(/^0+/, '')}`
+        : null
+
       const { data, error: signUpError } = await supabase.auth.signUp({
-        email,
+        email: email.trim(),
         password,
       })
+
       if (signUpError) {
-        setError(signUpError.message)
+        if (signUpError.message?.toLowerCase().includes('already')) {
+          setError(
+            isAr
+              ? 'البريد الإلكتروني مسجل مسبقاً'
+              : 'This email is already registered'
+          )
+        } else {
+          setError(signUpError.message)
+        }
+        setLoading(false)
         return
       }
+
       const { error: insertError } = await supabase.from('users').insert([
         {
           id: data.user.id,
-          email,
-          full_name: fullName,
-          phone,
+          email: email.trim(),
+          full_name: fullName.trim(),
+          phone: fullPhone,
           user_type: selectedRole,
         },
       ])
+
       if (insertError) {
         setError(insertError.message)
+        setLoading(false)
         return
       }
-      navigate('/login')
+
+      localStorage.setItem('sela_user_type', selectedRole)
+
+      navigate('/login', {
+        state: {
+          justSignedUp: true,
+          email: email.trim(),
+        },
+      })
     } catch (err) {
-      setError(err.message)
+      setError(
+        err.message ||
+          (isAr ? 'حدث خطأ. حاول مرة أخرى' : 'Something went wrong. Try again')
+      )
     } finally {
       setLoading(false)
     }
@@ -116,7 +181,7 @@ const SignUp = () => {
           </span>
         </h1>
 
-        <div className='signup-form'>
+        <form onSubmit={handleSignUp} className='signup-form' noValidate>
           <label className='signup-label'>
             {isAr ? 'أنا...' : 'I am a...'}
           </label>
@@ -128,12 +193,9 @@ const SignUp = () => {
                 type='button'
                 className={`signup-role-card ${selectedRole === role.id ? 'signup-role-active' : ''}`}
                 onClick={() => setSelectedRole(role.id)}
+                aria-pressed={selectedRole === role.id}
               >
-                <img
-                  src={role.icon}
-                  alt={role.title}
-                  className='signup-role-icon'
-                />
+                <img src={role.icon} alt='' className='signup-role-icon' />
                 <div className='signup-role-title'>{role.title}</div>
                 <div className='signup-role-desc'>{role.description}</div>
               </button>
@@ -142,48 +204,74 @@ const SignUp = () => {
 
           <input
             type='text'
-            placeholder={isAr ? 'الاسم الكامل' : 'Ahmed Hassan'}
+            placeholder={isAr ? 'الاسم الكامل' : 'Full name'}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             className='signup-input'
+            autoComplete='name'
+            aria-label={isAr ? 'الاسم الكامل' : 'Full name'}
           />
           <input
-            type='text'
+            type='email'
             placeholder='you@company.com'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className='signup-input'
+            autoComplete='email'
+            aria-label={isAr ? 'البريد الإلكتروني' : 'Email'}
           />
 
           <div className='signup-phone-row'>
-            <select className='signup-country-select'>
-              <option>🇪🇬 +20</option>
-              <option>🇸🇦 +966</option>
-              <option>🇦🇪 +971</option>
+            <select
+              className='signup-country-select'
+              value={countryCode}
+              onChange={(e) => setCountryCode(e.target.value)}
+              aria-label={isAr ? 'رمز الدولة' : 'Country code'}
+            >
+              <option value='+20'>🇪🇬 +20</option>
+              <option value='+966'>🇸🇦 +966</option>
+              <option value='+971'>🇦🇪 +971</option>
             </select>
             <input
-              type='text'
+              type='tel'
               placeholder={isAr ? 'رقم الهاتف' : 'Phone number'}
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ''))}
               className='signup-input signup-phone-input'
+              autoComplete='tel'
+              aria-label={isAr ? 'رقم الهاتف' : 'Phone number'}
             />
           </div>
 
           <div className='signup-password-wrapper'>
             <input
               type={showPassword ? 'text' : 'password'}
-              placeholder={isAr ? 'كلمة المرور' : 'Password'}
+              placeholder={
+                isAr
+                  ? 'كلمة المرور (8 أحرف على الأقل)'
+                  : 'Password (at least 8 characters)'
+              }
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className='signup-input'
+              autoComplete='new-password'
+              aria-label={isAr ? 'كلمة المرور' : 'Password'}
             />
             <button
               type='button'
               className='signup-toggle-password'
               onClick={() => setShowPassword(!showPassword)}
+              aria-label={
+                showPassword
+                  ? isAr
+                    ? 'إخفاء كلمة المرور'
+                    : 'Hide password'
+                  : isAr
+                    ? 'إظهار كلمة المرور'
+                    : 'Show password'
+              }
             >
-              <img src={iconSee} alt='toggle' className='signup-eye-icon' />
+              <img src={iconSee} alt='' className='signup-eye-icon' />
             </button>
           </div>
 
@@ -194,13 +282,24 @@ const SignUp = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className='signup-input'
+              autoComplete='new-password'
+              aria-label={isAr ? 'تأكيد كلمة المرور' : 'Confirm Password'}
             />
             <button
               type='button'
               className='signup-toggle-password'
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              aria-label={
+                showConfirmPassword
+                  ? isAr
+                    ? 'إخفاء كلمة المرور'
+                    : 'Hide password'
+                  : isAr
+                    ? 'إظهار كلمة المرور'
+                    : 'Show password'
+              }
             >
-              <img src={iconSee} alt='toggle' className='signup-eye-icon' />
+              <img src={iconSee} alt='' className='signup-eye-icon' />
             </button>
           </div>
 
@@ -221,11 +320,15 @@ const SignUp = () => {
             </span>
           </label>
 
-          {error && <p className='signup-error'>{error}</p>}
+          {error && (
+            <p className='signup-error' role='alert'>
+              {error}
+            </p>
+          )}
 
           <button
+            type='submit'
             className='signup-button-primary'
-            onClick={handleSignUp}
             disabled={loading}
           >
             {loading
@@ -236,23 +339,11 @@ const SignUp = () => {
                 ? 'إنشاء حساب'
                 : 'CREATE ACCOUNT'}
           </button>
-
-          <button
-            className='signup-button-primary'
-            style={{
-              background: '#1a1a1a',
-              border: '1px solid rgba(0,167,229,0.3)',
-              marginTop: 8,
-            }}
-            onClick={() => navigate('/browse-needs')}
-          >
-            SKIP SIGNUP (TEST)
-          </button>
-        </div>
+        </form>
 
         <div className='signup-divider'>
           <div className='signup-line' />
-          <span className='signup-or-text'>OR</span>
+          <span className='signup-or-text'>{isAr ? 'أو' : 'OR'}</span>
           <div className='signup-line' />
         </div>
 
@@ -261,14 +352,26 @@ const SignUp = () => {
         </p>
 
         <div className='signup-social'>
-          <button type='button' className='signup-social-button'>
-            <img src={iconGmail} alt='Gmail' />
+          <button
+            type='button'
+            className='signup-social-button'
+            aria-label='Sign up with Google'
+          >
+            <img src={iconGmail} alt='' />
           </button>
-          <button type='button' className='signup-social-button'>
-            <img src={iconIn} alt='LinkedIn' />
+          <button
+            type='button'
+            className='signup-social-button'
+            aria-label='Sign up with LinkedIn'
+          >
+            <img src={iconIn} alt='' />
           </button>
-          <button type='button' className='signup-social-button'>
-            <img src={iconApple} alt='Apple' />
+          <button
+            type='button'
+            className='signup-social-button'
+            aria-label='Sign up with Apple'
+          >
+            <img src={iconApple} alt='' />
           </button>
         </div>
 

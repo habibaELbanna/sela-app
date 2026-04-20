@@ -1,0 +1,95 @@
+.sk-list {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  gap: 16px;
+}
+
+.sk-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  background: #0e0e0e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sk-thread {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sk-thread-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sk-vendor-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  background: #0e0e0e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sk-vendor-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+
+.sk-vendor-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sk-avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.sk-logo {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.sk-line {
+  height: 10px;
+}
+
+.sk-line-40 { width: 40%; }
+.sk-line-60 { width: 60%; }
+.sk-line-70 { width: 70%; }
+.sk-line-80 { width: 80%; }
+.sk-line-90 { width: 90%; }
+.sk-line-100 { width: 100%; }
+
+.sk-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.10) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes sk-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+[dir='rtl'] .sk-shimmer {
+  animation-direction: reverse;
+}

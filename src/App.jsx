@@ -19,6 +19,7 @@ import Notifications from './pages/Notifications/Notifications'
 import SearchFilters from './pages/SearchFilters/SearchFilters'
 import MyProposals from './pages/MyProposals/MyProposals'
 import MyNeeds from './pages/MyNeeds/MyNeeds'
+import { ToastProvider } from './components/Toast/Toast'
 
 const App = () => {
   return (
@@ -117,34 +118,36 @@ const App = () => {
             borderRadius: '48px',
           }}
         >
-          <BrowserRouter>
-            <Routes>
-              <Route path='/' element={<Splash />} />
-              <Route path='/onboarding' element={<Onboarding />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/forgot-password' element={<ForgotPassword />} />
-              <Route path='/signup' element={<SignUp />} />
-              <Route path='/browse-needs' element={<BrowseNeeds />} />
-              <Route path='/need/:id' element={<NeedDetails />} />
-              <Route path='/messages/new' element={<ChatThread />} />
-              <Route path='/messages/:id' element={<ChatThread />} />
-              <Route path='/profile' element={<Profile />} />
-              <Route path='/profile/edit' element={<EditProfile />} />
-              <Route path='/discover-needs' element={<DiscoverNeeds />} />
-              <Route path='/browse-vendors' element={<BrowseVendors />} />
-              <Route path='/discover-vendors' element={<DiscoverVendors />} />
-              <Route path='/vendor/:id' element={<VendorProfile />} />
-              <Route path='/profile/settings' element={<Settings />} />
-              <Route path='/messages' element={<MessagesList />} />
-              <Route
-                path='/profile/notifications'
-                element={<Notifications />}
-              />
-              <Route path='/search' element={<SearchFilters />} />
-              <Route path='/my-proposals' element={<MyProposals />} />
-              <Route path='/my-needs' element={<MyNeeds />} />
-            </Routes>
-          </BrowserRouter>
+          <ToastProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path='/' element={<Splash />} />
+                <Route path='/onboarding' element={<Onboarding />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/forgot-password' element={<ForgotPassword />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route path='/browse-needs' element={<BrowseNeeds />} />
+                <Route path='/need/:id' element={<NeedDetails />} />
+                <Route path='/messages/new' element={<ChatThread />} />
+                <Route path='/messages/:id' element={<ChatThread />} />
+                <Route path='/profile' element={<Profile />} />
+                <Route path='/profile/edit' element={<EditProfile />} />
+                <Route path='/discover-needs' element={<DiscoverNeeds />} />
+                <Route path='/browse-vendors' element={<BrowseVendors />} />
+                <Route path='/discover-vendors' element={<DiscoverVendors />} />
+                <Route path='/vendor/:id' element={<VendorProfile />} />
+                <Route path='/profile/settings' element={<Settings />} />
+                <Route path='/messages' element={<MessagesList />} />
+                <Route
+                  path='/profile/notifications'
+                  element={<Notifications />}
+                />
+                <Route path='/search' element={<SearchFilters />} />
+                <Route path='/my-proposals' element={<MyProposals />} />
+                <Route path='/my-needs' element={<MyNeeds />} />
+              </Routes>
+            </BrowserRouter>
+          </ToastProvider>
         </div>
       </div>
     </div>
