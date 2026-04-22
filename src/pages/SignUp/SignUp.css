@@ -89,24 +89,37 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
   font-family: inherit;
 }
 
 .signup-role-active {
   border-color: #00a7e5;
+  background-color: rgba(0, 167, 229, 0.08);
 }
 
 .signup-role-icon {
   width: 44px;
   height: 44px;
   object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+.signup-role-active .signup-role-icon {
+  filter: invert(49%) sepia(92%) saturate(1943%) hue-rotate(170deg)
+    brightness(96%) contrast(101%);
 }
 
 .signup-role-title {
   color: #ffffff;
   font-size: 18px;
   font-weight: 600;
+}
+
+.signup-role-active .signup-role-title {
+  color: #00a7e5;
 }
 
 .signup-role-desc {
@@ -139,9 +152,14 @@
   border-color: #00a7e5;
 }
 
-.signup-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #141414 inset;
-  -webkit-text-fill-color: #ffffff;
+.signup-input:-webkit-autofill,
+.signup-input:-webkit-autofill:hover,
+.signup-input:-webkit-autofill:focus,
+.signup-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #141414 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .signup-phone-row {
@@ -192,6 +210,11 @@
   justify-content: center;
 }
 
+[dir='rtl'] .signup-toggle-password {
+  right: auto;
+  left: 12px;
+}
+
 .signup-eye-icon {
   width: 20px;
   height: 20px;
@@ -224,6 +247,9 @@
   font-size: 13px;
   text-align: center;
   margin: 0;
+  padding: 8px 12px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .signup-button-primary {

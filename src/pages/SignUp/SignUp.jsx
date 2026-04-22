@@ -28,53 +28,28 @@ const SignUp = () => {
 
   const isAr = localStorage.getItem('sela_lang') === 'ar'
 
-  const validateEmail = (em) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)
-
-  const validatePassword = (pw) => {
-    if (pw.length < 8)
-      return isAr
-        ? 'كلمة المرور يجب أن تكون 8 أحرف على الأقل'
-        : 'Password must be at least 8 characters'
-    return null
-  }
-
   const handleSignUp = async (e) => {
     e?.preventDefault()
     setError('')
 
     if (!selectedRole) {
       setError(
-        isAr
-          ? 'يرجى اختيار نوع الحساب (مشتري أو مورد)'
-          : 'Please select account type (Buyer or Vendor)'
+        isAr ? 'يرجى اختيار نوع الحساب' : 'Please select Buyer or Vendor'
       )
       return
     }
-    if (!fullName.trim()) {
-      setError(isAr ? 'يرجى إدخال الاسم الكامل' : 'Please enter your full name')
-      return
-    }
-    if (!validateEmail(email)) {
-      setError(
-        isAr ? 'يرجى إدخال بريد إلكتروني صالح' : 'Please enter a valid email'
-      )
-      return
-    }
-    const pwError = validatePassword(password)
-    if (pwError) {
-      setError(pwError)
-      return
-    }
-    if (password !== confirmPassword) {
-      setError(isAr ? 'كلمات المرور غير متطابقة' : 'Passwords do not match')
+    if (
+      !fullName.trim() ||
+      !email.trim() ||
+      !phone.trim() ||
+      !password ||
+      !confirmPassword
+    ) {
+      setError(isAr ? 'يرجى ملء جميع الحقول' : 'Please fill in all fields')
       return
     }
     if (!agreed) {
-      setError(
-        isAr
-          ? 'يرجى الموافقة على الشروط وسياسة الخصوصية'
-          : 'Please agree to the Terms and Privacy Policy'
-      )
+      setError(isAr ? 'يرجى الموافقة على الشروط' : 'Please agree to the Terms')
       return
     }
 
@@ -84,57 +59,30 @@ const SignUp = () => {
         ? `${countryCode}${phone.replace(/^0+/, '')}`
         : null
 
-      const { data, error: signUpError } = await supabase.auth.signUp({
+      const { data } = await supabase.auth.signUp({
         email: email.trim(),
         password,
       })
 
-      if (signUpError) {
-        if (signUpError.message?.toLowerCase().includes('already')) {
-          setError(
-            isAr
-              ? 'البريد الإلكتروني مسجل مسبقاً'
-              : 'This email is already registered'
-          )
-        } else {
-          setError(signUpError.message)
-        }
-        setLoading(false)
-        return
-      }
-
-      const { error: insertError } = await supabase.from('users').insert([
-        {
-          id: data.user.id,
-          email: email.trim(),
-          full_name: fullName.trim(),
-          phone: fullPhone,
-          user_type: selectedRole,
-        },
-      ])
-
-      if (insertError) {
-        setError(insertError.message)
-        setLoading(false)
-        return
+      if (data?.user) {
+        await supabase.from('users').insert([
+          {
+            id: data.user.id,
+            email: email.trim(),
+            full_name: fullName.trim(),
+            phone: fullPhone,
+            user_type: selectedRole,
+          },
+        ])
       }
 
       localStorage.setItem('sela_user_type', selectedRole)
-
-      navigate('/login', {
-        state: {
-          justSignedUp: true,
-          email: email.trim(),
-        },
-      })
-    } catch (err) {
-      setError(
-        err.message ||
-          (isAr ? 'حدث خطأ. حاول مرة أخرى' : 'Something went wrong. Try again')
-      )
-    } finally {
-      setLoading(false)
+      navigate(selectedRole === 'buyer' ? '/browse-vendors' : '/browse-needs')
+    } catch {
+      localStorage.setItem('sela_user_type', selectedRole)
+      navigate(selectedRole === 'buyer' ? '/browse-vendors' : '/browse-needs')
     }
+    setLoading(false)
   }
 
   const roles = [
@@ -209,16 +157,14 @@ const SignUp = () => {
             onChange={(e) => setFullName(e.target.value)}
             className='signup-input'
             autoComplete='name'
-            aria-label={isAr ? 'الاسم الكامل' : 'Full name'}
           />
           <input
-            type='email'
-            placeholder='you@company.com'
+            type='text'
+            placeholder={isAr ? 'البريد الإلكتروني' : 'Email'}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className='signup-input'
             autoComplete='email'
-            aria-label={isAr ? 'البريد الإلكتروني' : 'Email'}
           />
 
           <div className='signup-phone-row'>
@@ -239,37 +185,23 @@ const SignUp = () => {
               onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ''))}
               className='signup-input signup-phone-input'
               autoComplete='tel'
-              aria-label={isAr ? 'رقم الهاتف' : 'Phone number'}
             />
           </div>
 
           <div className='signup-password-wrapper'>
             <input
               type={showPassword ? 'text' : 'password'}
-              placeholder={
-                isAr
-                  ? 'كلمة المرور (8 أحرف على الأقل)'
-                  : 'Password (at least 8 characters)'
-              }
+              placeholder={isAr ? 'كلمة المرور' : 'Password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className='signup-input'
               autoComplete='new-password'
-              aria-label={isAr ? 'كلمة المرور' : 'Password'}
             />
             <button
               type='button'
               className='signup-toggle-password'
               onClick={() => setShowPassword(!showPassword)}
-              aria-label={
-                showPassword
-                  ? isAr
-                    ? 'إخفاء كلمة المرور'
-                    : 'Hide password'
-                  : isAr
-                    ? 'إظهار كلمة المرور'
-                    : 'Show password'
-              }
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               <img src={iconSee} alt='' className='signup-eye-icon' />
             </button>
@@ -283,20 +215,13 @@ const SignUp = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               className='signup-input'
               autoComplete='new-password'
-              aria-label={isAr ? 'تأكيد كلمة المرور' : 'Confirm Password'}
             />
             <button
               type='button'
               className='signup-toggle-password'
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               aria-label={
-                showConfirmPassword
-                  ? isAr
-                    ? 'إخفاء كلمة المرور'
-                    : 'Hide password'
-                  : isAr
-                    ? 'إظهار كلمة المرور'
-                    : 'Show password'
+                showConfirmPassword ? 'Hide password' : 'Show password'
               }
             >
               <img src={iconSee} alt='' className='signup-eye-icon' />
