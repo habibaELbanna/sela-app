@@ -23,7 +23,11 @@
   width: 100%;
   height: 300px;
   top: -100px;
-  background: radial-gradient(ellipse at 30% 50%, rgba(0, 167, 229, 0.20) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(0, 167, 229, 0.2) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: sf-breathe-1 8s ease-in-out infinite;
 }
@@ -33,19 +37,37 @@
   width: 100%;
   height: 300px;
   bottom: -80px;
-  background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 180, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    rgba(0, 100, 180, 0.15) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: sf-breathe-2 10s ease-in-out infinite;
 }
 
 @keyframes sf-breathe-1 {
-  0%, 100% { opacity: 0.6; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(20px); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
 }
 
 @keyframes sf-breathe-2 {
-  0%, 100% { opacity: 0.5; transform: translateY(0px); }
-  50% { opacity: 0.9; transform: translateY(-20px); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-20px);
+  }
 }
 
 .sf-topbar {
@@ -63,7 +85,7 @@
 .sf-back {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -82,7 +104,7 @@
   width: 100%;
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   padding: 8px 32px 8px 0;
@@ -118,7 +140,9 @@
   padding: 0 20px;
 }
 
-.sf-scroll::-webkit-scrollbar { display: none; }
+.sf-scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .sf-section {
   padding: 16px 0;
@@ -148,7 +172,7 @@
 .sf-mode-btn {
   flex: 1;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #b0b0b0;
   font-family: inherit;
   font-size: 13px;
@@ -163,14 +187,14 @@
 }
 
 [dir='rtl'] .sf-mode-btn:first-child {
-  border-right: 1px solid rgba(255, 255, 255, 0.10);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   border-left: none;
 }
 
 .sf-mode-active {
   background: #00a7e5;
   border-color: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .sf-keyword-list {
@@ -184,7 +208,7 @@
   align-items: center;
   gap: 6px;
   background: transparent;
-  border: 1px solid rgba(0, 167, 229, 0.40);
+  border: 1px solid rgba(0, 167, 229, 0.4);
   color: #00a7e5;
   font-size: 12px;
   font-weight: 500;
@@ -230,7 +254,7 @@
 .sf-keyword-input {
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 12px;
   padding: 4px 0;
@@ -296,13 +320,16 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
+  width: 100%;
 }
 
 .sf-budget-input {
   flex: 1;
   background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  color: #ffffff;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   padding: 11px 14px;
@@ -401,7 +428,7 @@
 .sf-reset-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
@@ -411,14 +438,14 @@
 }
 
 .sf-reset-btn:active {
-  border-color: rgba(255, 255, 255, 0.40);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .sf-apply-btn {
   flex: 1;
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -450,7 +477,7 @@
 .sf-gps-btn {
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 11px;
   font-weight: 700;
@@ -465,7 +492,7 @@
 }
 
 .sf-gps-active {
-  background: #10B981;
+  background: #10b981;
 }
 
 .sf-location-list {
@@ -527,7 +554,7 @@
 }
 
 .sf-filter-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 600;
 }
@@ -560,7 +587,7 @@
   left: 2px;
   width: 16px;
   height: 16px;
-  background: #ffffff;
+  background: #cccccc;
   transition: transform 0.2s ease;
 }
 

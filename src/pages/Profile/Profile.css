@@ -21,7 +21,11 @@
   width: 100%;
   height: 300px;
   top: -100px;
-  background: radial-gradient(ellipse at 30% 50%, rgba(0, 167, 229, 0.20) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(0, 167, 229, 0.2) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: pf-breathe-1 8s ease-in-out infinite;
 }
@@ -31,19 +35,37 @@
   width: 100%;
   height: 300px;
   bottom: 20px;
-  background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 180, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    rgba(0, 100, 180, 0.15) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: pf-breathe-2 10s ease-in-out infinite;
 }
 
 @keyframes pf-breathe-1 {
-  0%, 100% { opacity: 0.6; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(20px); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
 }
 
 @keyframes pf-breathe-2 {
-  0%, 100% { opacity: 0.5; transform: translateY(0px); }
-  50% { opacity: 0.9; transform: translateY(-20px); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-20px);
+  }
 }
 
 .pf-scroll {
@@ -57,7 +79,9 @@
   box-sizing: border-box;
 }
 
-.pf-scroll::-webkit-scrollbar { display: none; }
+.pf-scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .pf-topbar {
   display: flex;
@@ -68,7 +92,7 @@
 }
 
 .pf-topbar-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 22px;
   font-weight: 700;
   margin: 0;
@@ -82,7 +106,7 @@
 .pf-icon-btn {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -140,7 +164,7 @@
 }
 
 .pf-name {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 18px;
   font-weight: 700;
 }
@@ -148,7 +172,7 @@
 .pf-vendor-tag {
   align-self: flex-start;
   background: #0e0e0e;
-  border: 1px solid rgba(0, 167, 229, 0.40);
+  border: 1px solid rgba(0, 167, 229, 0.4);
   color: #00a7e5;
   font-size: 11px;
   font-weight: 600;
@@ -157,7 +181,7 @@
 }
 
 .pf-position {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 500;
 }
@@ -175,8 +199,8 @@
 .pf-edit-btn {
   width: 100%;
   background: #0e0e0e;
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -221,12 +245,18 @@
 }
 
 @keyframes pf-fade {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .pf-section-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 14px 0;
@@ -253,7 +283,7 @@
 }
 
 .pf-stat-value {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 22px;
   font-weight: 700;
   line-height: 1;
@@ -294,7 +324,7 @@
 }
 
 .pf-action-label {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 600;
 }
@@ -339,7 +369,7 @@
 }
 
 .pf-info-value {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   white-space: nowrap;
   overflow: hidden;
@@ -367,7 +397,7 @@
 }
 
 .pf-verify-text {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   flex: 1;
 }
@@ -380,7 +410,9 @@
   scrollbar-width: none;
 }
 
-.pf-chips::-webkit-scrollbar { display: none; }
+.pf-chips::-webkit-scrollbar {
+  display: none;
+}
 
 .pf-chip {
   background: #0e0e0e;
@@ -398,7 +430,7 @@
 .pf-chip-active {
   background: #00a7e5;
   border-color: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
   font-weight: 700;
 }
 
@@ -438,7 +470,7 @@
 }
 
 .pf-activity-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
@@ -459,7 +491,7 @@
   width: 100%;
   background: #0e0e0e;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -487,7 +519,7 @@
 .pf-saved-match {
   align-self: flex-start;
   background: #0e0e0e;
-  border: 1px solid rgba(0, 167, 229, 0.30);
+  border: 1px solid rgba(0, 167, 229, 0.3);
   color: #00a7e5;
   font-size: 10px;
   font-weight: 700;
@@ -497,7 +529,7 @@
 }
 
 .pf-saved-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 700;
   margin: 0 0 4px 0;
@@ -538,13 +570,13 @@
 
 .pf-saved-view {
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .pf-saved-remove {
   background: #0e0e0e;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .pf-saved-btn:active {
@@ -585,11 +617,11 @@
 
 .pf-account-label {
   flex: 1;
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 500;
 }
 
 .pf-account-label-danger {
-  color: #EF4444;
+  color: #ef4444;
 }

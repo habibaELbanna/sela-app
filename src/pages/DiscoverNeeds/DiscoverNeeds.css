@@ -82,7 +82,7 @@
 }
 
 .dc-topbar-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 17px;
   font-weight: 700;
   margin: 0;
@@ -91,7 +91,7 @@
 .dc-icon-btn {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -273,7 +273,7 @@
 }
 
 .dc-company-name {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 15px;
   font-weight: 700;
 }
@@ -299,7 +299,7 @@
 }
 
 .dc-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
   margin: 2px 0 2px 0;
@@ -309,7 +309,7 @@
 }
 
 .dc-budget {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 500;
   margin-bottom: 6px;
@@ -438,7 +438,7 @@
 }
 
 .dc-empty-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 18px;
   font-weight: 700;
   margin: 0;
@@ -471,13 +471,13 @@
 
 .dc-empty-primary {
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .dc-empty-secondary {
   background: #0e0e0e;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .dc-empty-btn:active {
@@ -538,7 +538,7 @@
 }
 
 .dc-info-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 17px;
   font-weight: 700;
   margin: 0 0 16px 0;
@@ -592,7 +592,7 @@
 }
 
 .dc-info-head {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 700;
 }
@@ -625,7 +625,7 @@
   width: 100%;
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;

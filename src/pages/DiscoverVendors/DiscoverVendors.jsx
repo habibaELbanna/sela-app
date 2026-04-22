@@ -367,7 +367,7 @@ const DiscoverVendors = () => {
                 <circle cx='12' cy='12' r='10' fill='#00a7e5' />
                 <path
                   d='M8 12l3 3 5-6'
-                  stroke='#ffffff'
+                  stroke='#cccccc'
                   strokeWidth='2.2'
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -704,7 +704,7 @@ const DiscoverVendors = () => {
               height='22'
               viewBox='0 0 24 24'
               fill='none'
-              stroke='#ffffff'
+              stroke='#cccccc'
               strokeWidth='2'
               strokeLinecap='round'
               strokeLinejoin='round'

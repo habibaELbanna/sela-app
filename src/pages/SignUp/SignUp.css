@@ -53,7 +53,7 @@
 }
 
 .signup-headline-white {
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .signup-headline-blue {
@@ -113,7 +113,7 @@
 }
 
 .signup-role-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 18px;
   font-weight: 600;
 }
@@ -133,13 +133,13 @@
   height: 52px;
   background-color: #141414;
   border: 1px solid rgba(0, 167, 229, 0.2);
-  color: #ffffff;
+  color: #cccccc;
   font-size: 15px;
   padding: 0 16px;
   box-sizing: border-box;
   font-family: inherit;
   transition: border-color 0.2s ease;
-  -webkit-text-fill-color: #ffffff;
+  -webkit-text-fill-color: #cccccc;
 }
 
 .signup-input::placeholder {
@@ -157,8 +157,8 @@
 .signup-input:-webkit-autofill:focus,
 .signup-input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0px 1000px #141414 inset !important;
-  -webkit-text-fill-color: #ffffff !important;
-  caret-color: #ffffff !important;
+  -webkit-text-fill-color: #cccccc !important;
+  caret-color: #cccccc !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -172,7 +172,7 @@
   height: 52px;
   background-color: #141414;
   border: 1px solid rgba(0, 167, 229, 0.2);
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   padding: 0 8px;
   box-sizing: border-box;
@@ -257,7 +257,7 @@
   height: 52px;
   background-color: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 2px;

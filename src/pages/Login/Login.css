@@ -3,8 +3,8 @@
 .lg-input-wrap input:-webkit-autofill:focus,
 .lg-input-wrap input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset !important;
-  -webkit-text-fill-color: #ffffff !important;
-  caret-color: #ffffff !important;
+  -webkit-text-fill-color: #cccccc !important;
+  caret-color: #cccccc !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .lg-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 30px;
   font-weight: 700;
   margin: 0 0 8px;
@@ -145,7 +145,7 @@
 }
 
 .lg-label {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 600;
 }
@@ -181,7 +181,7 @@
   background: transparent;
   border: 0;
   outline: 0;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   padding: 14px 42px;
@@ -246,7 +246,7 @@
 .lg-signin-btn {
   width: 100%;
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
   border: 0;
   outline: 0;
   font-family: inherit;
@@ -303,7 +303,7 @@
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.1);
   outline: 0;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;

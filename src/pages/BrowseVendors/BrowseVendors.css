@@ -25,24 +25,46 @@
 
 .bv-bg-streak-1 {
   top: -100px;
-  background: radial-gradient(ellipse at 30% 50%, rgba(0, 167, 229, 0.20) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(0, 167, 229, 0.2) 0%,
+    transparent 70%
+  );
   animation: bv-breathe-1 8s ease-in-out infinite;
 }
 
 .bv-bg-streak-2 {
   bottom: -80px;
-  background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 180, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    rgba(0, 100, 180, 0.15) 0%,
+    transparent 70%
+  );
   animation: bv-breathe-2 10s ease-in-out infinite;
 }
 
 @keyframes bv-breathe-1 {
-  0%, 100% { opacity: 0.6; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(20px); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
 }
 
 @keyframes bv-breathe-2 {
-  0%, 100% { opacity: 0.5; transform: translateY(0px); }
-  50% { opacity: 0.9; transform: translateY(-20px); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-20px);
+  }
 }
 
 .bv-scroll-area {
@@ -54,7 +76,9 @@
   scrollbar-width: none;
 }
 
-.bv-scroll-area::-webkit-scrollbar { display: none; }
+.bv-scroll-area::-webkit-scrollbar {
+  display: none;
+}
 
 .bv-header {
   padding: 52px 20px 12px;
@@ -85,7 +109,7 @@
 }
 
 .bv-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 22px;
   font-weight: 700;
   margin: 0;
@@ -99,7 +123,7 @@
 .bv-icon-btn {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -115,7 +139,9 @@
   padding-bottom: 2px;
 }
 
-.bv-filters-scroll::-webkit-scrollbar { display: none; }
+.bv-filters-scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .bv-filter-btn {
   background: #0e0e0e;
@@ -133,7 +159,7 @@
 .bv-filter-active {
   background: #00a7e5;
   border-color: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
   font-weight: 700;
 }
 
@@ -172,7 +198,7 @@
 .bv-card {
   position: relative;
   background: #0e0e0e;
-  border: 1px solid rgba(0, 167, 229, 0.20);
+  border: 1px solid rgba(0, 167, 229, 0.2);
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -182,7 +208,7 @@
 }
 
 .bv-card:active {
-  border-color: rgba(0, 167, 229, 0.50);
+  border-color: rgba(0, 167, 229, 0.5);
 }
 
 .bv-card-top {
@@ -205,7 +231,7 @@
   height: 44px;
   object-fit: cover;
   flex-shrink: 0;
-  border: 1px solid rgba(0, 167, 229, 0.20);
+  border: 1px solid rgba(0, 167, 229, 0.2);
 }
 
 .bv-vendor-logo-placeholder {
@@ -237,7 +263,7 @@
 }
 
 .bv-vendor-name {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
@@ -256,7 +282,7 @@
 
 .bv-match-badge {
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 700;
   padding: 4px 10px;
@@ -342,7 +368,7 @@
   gap: 5px;
   background: #0e0e0e;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
@@ -362,9 +388,15 @@
 }
 
 @keyframes bv-save-pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .bv-action-anim svg {

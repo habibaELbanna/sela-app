@@ -82,7 +82,7 @@
 }
 
 .dv-topbar-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 17px;
   font-weight: 700;
   margin: 0;
@@ -91,7 +91,7 @@
 .dv-icon-btn {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -283,7 +283,7 @@
 }
 
 .dv-company-name {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 17px;
   font-weight: 700;
 }
@@ -296,7 +296,7 @@
 }
 
 .dv-rating-num {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 12px;
   font-weight: 600;
   margin-left: 4px;
@@ -345,7 +345,7 @@
 }
 
 .dv-stat-value {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
 }
@@ -462,7 +462,7 @@
 }
 
 .dv-pricing-value {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 700;
 }
@@ -576,7 +576,7 @@
 }
 
 .dv-empty-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 18px;
   font-weight: 700;
   margin: 0;
@@ -609,13 +609,13 @@
 
 .dv-empty-primary {
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .dv-empty-secondary {
   background: #0e0e0e;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .dv-empty-btn:active {
@@ -676,7 +676,7 @@
 }
 
 .dv-info-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 17px;
   font-weight: 700;
   margin: 0 0 16px 0;
@@ -730,7 +730,7 @@
 }
 
 .dv-info-head {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 700;
 }
@@ -763,7 +763,7 @@
   width: 100%;
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;

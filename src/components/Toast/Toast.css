@@ -17,31 +17,49 @@
   align-items: center;
   gap: 10px;
   background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cccccc;
   padding: 11px 12px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   pointer-events: auto;
   animation: ts-slide 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.15);
 }
 
-.ts-success { border-left: 3px solid #10B981; }
-.ts-error { border-left: 3px solid #EF4444; }
-.ts-info { border-left: 3px solid #00a7e5; }
+.ts-success {
+  border-left: 3px solid #10b981;
+}
+.ts-error {
+  border-left: 3px solid #ef4444;
+}
+.ts-info {
+  border-left: 3px solid #00a7e5;
+}
 
 [dir='rtl'] .ts-success,
 [dir='rtl'] .ts-error,
 [dir='rtl'] .ts-info {
-  border-left: 1px solid rgba(255, 255, 255, 0.10);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
   border-right: 3px solid;
 }
-[dir='rtl'] .ts-success { border-right-color: #10B981; }
-[dir='rtl'] .ts-error { border-right-color: #EF4444; }
-[dir='rtl'] .ts-info { border-right-color: #00a7e5; }
+[dir='rtl'] .ts-success {
+  border-right-color: #10b981;
+}
+[dir='rtl'] .ts-error {
+  border-right-color: #ef4444;
+}
+[dir='rtl'] .ts-info {
+  border-right-color: #00a7e5;
+}
 
 @keyframes ts-slide {
-  from { opacity: 0; transform: translateY(-12px) scale(0.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .ts-icon {
@@ -69,5 +87,5 @@
 }
 
 .ts-close:hover {
-  color: #ffffff;
+  color: #cccccc;
 }

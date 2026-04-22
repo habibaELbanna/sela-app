@@ -23,7 +23,11 @@
   width: 100%;
   height: 300px;
   top: -100px;
-  background: radial-gradient(ellipse at 30% 50%, rgba(0, 167, 229, 0.20) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(0, 167, 229, 0.2) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: ep-breathe-1 8s ease-in-out infinite;
 }
@@ -33,19 +37,37 @@
   width: 100%;
   height: 300px;
   bottom: -80px;
-  background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 180, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    rgba(0, 100, 180, 0.15) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: ep-breathe-2 10s ease-in-out infinite;
 }
 
 @keyframes ep-breathe-1 {
-  0%, 100% { opacity: 0.6; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(20px); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
 }
 
 @keyframes ep-breathe-2 {
-  0%, 100% { opacity: 0.5; transform: translateY(0px); }
-  50% { opacity: 0.9; transform: translateY(-20px); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-20px);
+  }
 }
 
 .ep-topbar {
@@ -64,7 +86,7 @@
 .ep-back {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -74,7 +96,7 @@
 
 .ep-topbar-title {
   flex: 1;
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -105,7 +127,7 @@
 }
 
 .ep-save-done {
-  color: #10B981;
+  color: #10b981;
 }
 
 .ep-scroll {
@@ -117,15 +139,17 @@
   padding: 24px 20px;
 }
 
-.ep-scroll::-webkit-scrollbar { display: none; }
+.ep-scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .ep-error {
   display: flex;
   align-items: center;
   gap: 10px;
   background: #0e0e0e;
-  border: 1px solid rgba(239, 68, 68, 0.40);
-  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ef4444;
   font-size: 13px;
   padding: 12px 14px;
   margin-bottom: 16px;
@@ -156,7 +180,7 @@
   height: 96px;
   object-fit: cover;
   display: block;
-  border: 1px solid rgba(0, 167, 229, 0.30);
+  border: 1px solid rgba(0, 167, 229, 0.3);
 }
 
 .ep-avatar-overlay {
@@ -187,7 +211,7 @@
 }
 
 .ep-section-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -211,7 +235,7 @@
 }
 
 .ep-required {
-  color: #EF4444;
+  color: #ef4444;
 }
 
 .ep-input,
@@ -219,8 +243,8 @@
 .ep-select {
   width: 100%;
   background: #0e0e0e;
-  border: 1px solid rgba(0, 167, 229, 0.20);
-  color: #ffffff;
+  border: 1px solid rgba(0, 167, 229, 0.2);
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   padding: 12px 14px;
@@ -237,7 +261,7 @@
 .ep-input:focus,
 .ep-textarea:focus,
 .ep-select:focus {
-  border-color: rgba(0, 167, 229, 0.60);
+  border-color: rgba(0, 167, 229, 0.6);
 }
 
 .ep-textarea {
@@ -272,8 +296,8 @@
 .ep-cancel-btn {
   flex: 1;
   background: #0e0e0e;
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 600;
@@ -295,7 +319,7 @@
   flex: 2;
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -305,7 +329,9 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: opacity 0.2s ease, background 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    background 0.2s ease;
 }
 
 .ep-save-btn:active:not(:disabled) {
@@ -317,24 +343,26 @@
 }
 
 .ep-save-btn-loading {
-  background: rgba(0, 167, 229, 0.60);
+  background: rgba(0, 167, 229, 0.6);
 }
 
 .ep-save-btn-done {
-  background: #10B981;
+  background: #10b981;
 }
 
 .ep-mini-spinner {
   width: 14px;
   height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.30);
-  border-top-color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #cccccc;
   border-radius: 50%;
   animation: ep-spin 0.7s linear infinite;
 }
 
 @keyframes ep-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .ep-modal-overlay {
@@ -348,14 +376,18 @@
 }
 
 @keyframes ep-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .ep-modal {
   width: 100%;
   background: #0e0e0e;
-  border-top: 1px solid rgba(0, 167, 229, 0.30);
+  border-top: 1px solid rgba(0, 167, 229, 0.3);
   padding: 12px 20px 28px;
   display: flex;
   flex-direction: column;
@@ -365,19 +397,23 @@
 }
 
 @keyframes ep-slide-up {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .ep-modal-handle {
   width: 40px;
   height: 4px;
-  background: rgba(255, 255, 255, 0.20);
+  background: rgba(255, 255, 255, 0.2);
   margin: 0 auto 14px;
 }
 
 .ep-modal-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 4px 0;
@@ -401,14 +437,14 @@
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border: 1px solid rgba(0, 167, 229, 0.30);
+  border: 1px solid rgba(0, 167, 229, 0.3);
 }
 
 .ep-modal-input {
   width: 100%;
   background: #0e0e0e;
-  border: 1px solid rgba(0, 167, 229, 0.30);
-  color: #ffffff;
+  border: 1px solid rgba(0, 167, 229, 0.3);
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   padding: 12px 14px;
@@ -418,14 +454,14 @@
 }
 
 .ep-modal-input:focus {
-  border-color: rgba(0, 167, 229, 0.70);
+  border-color: rgba(0, 167, 229, 0.7);
 }
 
 .ep-modal-save {
   width: 100%;
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -435,13 +471,15 @@
   transition: opacity 0.2s ease;
 }
 
-.ep-modal-save:active { opacity: 0.85; }
+.ep-modal-save:active {
+  opacity: 0.85;
+}
 
 .ep-modal-remove {
   width: 100%;
   background: #0e0e0e;
-  border: 1px solid rgba(239, 68, 68, 0.40);
-  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ef4444;
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -452,7 +490,7 @@
 }
 
 .ep-modal-remove:active {
-  border-color: #EF4444;
+  border-color: #ef4444;
 }
 
 .ep-modal-cancel {

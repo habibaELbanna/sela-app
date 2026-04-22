@@ -511,7 +511,7 @@ const Profile = () => {
                 height='10'
                 viewBox='0 0 24 24'
                 fill='none'
-                stroke='#ffffff'
+                stroke='#cccccc'
                 strokeWidth='2.5'
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -528,7 +528,7 @@ const Profile = () => {
                 <circle cx='12' cy='12' r='10' fill='#00a7e5' />
                 <path
                   d='M8 12l3 3 5-6'
-                  stroke='#ffffff'
+                  stroke='#cccccc'
                   strokeWidth='2.2'
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -1108,7 +1108,7 @@ const Profile = () => {
                   <circle cx='12' cy='12' r='10' fill='#10B981' />
                   <path
                     d='M8 12l3 3 5-6'
-                    stroke='#ffffff'
+                    stroke='#cccccc'
                     strokeWidth='2.2'
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -1124,7 +1124,7 @@ const Profile = () => {
                   <circle cx='12' cy='12' r='10' fill='#10B981' />
                   <path
                     d='M8 12l3 3 5-6'
-                    stroke='#ffffff'
+                    stroke='#cccccc'
                     strokeWidth='2.2'
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -1140,7 +1140,7 @@ const Profile = () => {
                   <circle cx='12' cy='12' r='10' fill='#10B981' />
                   <path
                     d='M8 12l3 3 5-6'
-                    stroke='#ffffff'
+                    stroke='#cccccc'
                     strokeWidth='2.2'
                     strokeLinecap='round'
                     strokeLinejoin='round'
@@ -1159,11 +1159,11 @@ const Profile = () => {
                     y1='8'
                     x2='12'
                     y2='13'
-                    stroke='#ffffff'
+                    stroke='#cccccc'
                     strokeWidth='2.2'
                     strokeLinecap='round'
                   />
-                  <circle cx='12' cy='16.5' r='1.1' fill='#ffffff' />
+                  <circle cx='12' cy='16.5' r='1.1' fill='#cccccc' />
                 </svg>
                 <span className='pf-verify-text'>
                   {isAr ? 'الرقم الضريبي قيد المراجعة' : 'Tax ID pending'}

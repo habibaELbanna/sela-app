@@ -113,7 +113,7 @@
 .ct-back {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -165,7 +165,7 @@
 }
 
 .ct-buyer-name {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
@@ -250,7 +250,7 @@
 }
 
 .ct-context-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -310,7 +310,7 @@
 }
 
 .ct-empty-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 15px;
   font-weight: 700;
   margin: 0;
@@ -371,13 +371,13 @@
 
 .ct-bubble-me {
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .ct-bubble-them {
   background: #1a1a1a;
   border: 1px solid rgba(0, 167, 229, 0.15);
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .ct-typing {
@@ -441,7 +441,7 @@
   flex: 1;
   background: #1a1a1a;
   border: 1px solid rgba(0, 167, 229, 0.2);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   padding: 10px 14px;
@@ -472,7 +472,7 @@
 
 .ct-send-active {
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .ct-send-btn:disabled {
@@ -526,7 +526,7 @@
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;

@@ -23,7 +23,11 @@
   width: 100%;
   height: 300px;
   top: -100px;
-  background: radial-gradient(ellipse at 30% 50%, rgba(0, 167, 229, 0.20) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(0, 167, 229, 0.2) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: st-breathe-1 8s ease-in-out infinite;
 }
@@ -33,19 +37,37 @@
   width: 100%;
   height: 300px;
   bottom: -80px;
-  background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 180, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    rgba(0, 100, 180, 0.15) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: st-breathe-2 10s ease-in-out infinite;
 }
 
 @keyframes st-breathe-1 {
-  0%, 100% { opacity: 0.6; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(20px); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
 }
 
 @keyframes st-breathe-2 {
-  0%, 100% { opacity: 0.5; transform: translateY(0px); }
-  50% { opacity: 0.9; transform: translateY(-20px); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-20px);
+  }
 }
 
 .st-topbar {
@@ -63,7 +85,7 @@
 .st-back {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -73,7 +95,7 @@
 
 .st-topbar-title {
   flex: 1;
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -89,10 +111,12 @@
   padding: 16px 20px 0;
 }
 
-.st-scroll::-webkit-scrollbar { display: none; }
+.st-scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .st-section-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.3px;
@@ -145,14 +169,14 @@
 }
 
 .st-row-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.3;
 }
 
 .st-row-title-danger {
-  color: #EF4444;
+  color: #ef4444;
 }
 
 .st-row-subtitle {
@@ -171,8 +195,8 @@
 }
 
 .st-row-badge {
-  background: #10B981;
-  color: #ffffff;
+  background: #10b981;
+  color: #cccccc;
   font-size: 10px;
   font-weight: 700;
   padding: 3px 8px;
@@ -207,7 +231,7 @@
   left: 2px;
   width: 16px;
   height: 16px;
-  background: #ffffff;
+  background: #cccccc;
   transition: transform 0.2s ease;
 }
 
@@ -226,8 +250,12 @@
 }
 
 @keyframes st-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .st-modal {
@@ -235,7 +263,7 @@
   max-height: 85%;
   overflow-y: auto;
   background: #0e0e0e;
-  border-top: 1px solid rgba(0, 167, 229, 0.30);
+  border-top: 1px solid rgba(0, 167, 229, 0.3);
   padding: 12px 22px 28px;
   display: flex;
   flex-direction: column;
@@ -244,22 +272,28 @@
   scrollbar-width: none;
 }
 
-.st-modal::-webkit-scrollbar { display: none; }
+.st-modal::-webkit-scrollbar {
+  display: none;
+}
 
 @keyframes st-slide-up {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .st-modal-handle {
   width: 40px;
   height: 4px;
-  background: rgba(255, 255, 255, 0.20);
+  background: rgba(255, 255, 255, 0.2);
   margin: 0 auto 14px;
 }
 
 .st-modal-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 4px 0;
@@ -280,7 +314,7 @@
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   padding: 14px 4px;
@@ -316,8 +350,8 @@
 
 .st-input {
   background: #0e0e0e;
-  border: 1px solid rgba(0, 167, 229, 0.20);
-  color: #ffffff;
+  border: 1px solid rgba(0, 167, 229, 0.2);
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   padding: 12px 14px;
@@ -327,14 +361,14 @@
 }
 
 .st-input:focus {
-  border-color: rgba(0, 167, 229, 0.60);
+  border-color: rgba(0, 167, 229, 0.6);
 }
 
 .st-modal-save {
   width: 100%;
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -344,7 +378,9 @@
   transition: opacity 0.15s ease;
 }
 
-.st-modal-save:active { opacity: 0.85; }
+.st-modal-save:active {
+  opacity: 0.85;
+}
 
 .st-modal-cancel {
   width: 100%;

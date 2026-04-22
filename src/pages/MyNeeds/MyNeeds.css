@@ -21,7 +21,11 @@
   width: 100%;
   height: 300px;
   top: -100px;
-  background: radial-gradient(ellipse at 30% 50%, rgba(0, 167, 229, 0.20) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 30% 50%,
+    rgba(0, 167, 229, 0.2) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: mn-breathe-1 8s ease-in-out infinite;
 }
@@ -31,19 +35,37 @@
   width: 100%;
   height: 300px;
   bottom: -80px;
-  background: radial-gradient(ellipse at 70% 50%, rgba(0, 100, 180, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse at 70% 50%,
+    rgba(0, 100, 180, 0.15) 0%,
+    transparent 70%
+  );
   filter: blur(60px);
   animation: mn-breathe-2 10s ease-in-out infinite;
 }
 
 @keyframes mn-breathe-1 {
-  0%, 100% { opacity: 0.6; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(20px); }
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
 }
 
 @keyframes mn-breathe-2 {
-  0%, 100% { opacity: 0.5; transform: translateY(0px); }
-  50% { opacity: 0.9; transform: translateY(-20px); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0px);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-20px);
+  }
 }
 
 .mn-scroll {
@@ -55,7 +77,9 @@
   scrollbar-width: none;
 }
 
-.mn-scroll::-webkit-scrollbar { display: none; }
+.mn-scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .mn-topbar {
   display: flex;
@@ -67,7 +91,7 @@
 .mn-back {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -84,7 +108,7 @@
 }
 
 .mn-topbar-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 18px;
   font-weight: 700;
   margin: 0;
@@ -149,7 +173,7 @@
 
 .mn-tab-active .mn-tab-badge {
   background: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
 }
 
 .mn-info-banner {
@@ -194,8 +218,8 @@
   align-items: center;
   gap: 6px;
   background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cccccc;
   font-family: inherit;
   font-size: 12px;
   padding: 6px 10px;
@@ -219,7 +243,7 @@
   right: 0;
   z-index: 50;
   background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   min-width: 160px;
   display: flex;
   flex-direction: column;
@@ -233,15 +257,21 @@
 }
 
 @keyframes mn-menu-slide {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mn-sort-item {
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 12px;
   padding: 11px 14px;
@@ -285,7 +315,7 @@
 }
 
 .mn-card:active {
-  border-color: rgba(0, 167, 229, 0.40);
+  border-color: rgba(0, 167, 229, 0.4);
 }
 
 .mn-card-top {
@@ -304,7 +334,7 @@
 }
 
 .mn-card-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.3;
@@ -324,20 +354,20 @@
 }
 
 .mn-st-open {
-  background: rgba(0, 167, 229, 0.10);
-  border: 1px solid rgba(0, 167, 229, 0.40);
+  background: rgba(0, 167, 229, 0.1);
+  border: 1px solid rgba(0, 167, 229, 0.4);
   color: #00a7e5;
 }
 
 .mn-st-fulfilled {
   background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.40);
-  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10b981;
 }
 
 .mn-st-closed {
   background: rgba(107, 114, 128, 0.12);
-  border: 1px solid rgba(107, 114, 128, 0.40);
+  border: 1px solid rgba(107, 114, 128, 0.4);
   color: #9ca3af;
 }
 
@@ -379,7 +409,7 @@
 }
 
 .mn-proposals-count {
-  color: #ffffff;
+  color: #cccccc;
   font-weight: 700;
 }
 
@@ -409,7 +439,7 @@
 }
 
 .mn-empty-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 17px;
   font-weight: 700;
   margin: 0;

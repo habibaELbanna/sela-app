@@ -85,7 +85,7 @@
 .vp-back {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -95,7 +95,7 @@
 
 .vp-topbar-title {
   flex: 1;
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -110,7 +110,7 @@
 .vp-icon-btn {
   background: none;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   padding: 0;
   display: flex;
@@ -177,7 +177,7 @@
 }
 
 .vp-company-name {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 16px;
   font-weight: 700;
 }
@@ -260,7 +260,7 @@
 }
 
 .vp-info-value {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 18px;
   font-weight: 700;
 }
@@ -301,7 +301,7 @@
 }
 
 .vp-section-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 15px;
   font-weight: 700;
   margin: 0 0 10px 0;
@@ -322,7 +322,7 @@
 }
 
 .vp-requirement span {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
 }
 
@@ -351,7 +351,7 @@
 }
 
 .vp-spec-value {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 12px;
   font-weight: 500;
   text-align: right;
@@ -402,7 +402,7 @@
 }
 
 .vp-portfolio-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 700;
   line-height: 1.3;
@@ -437,7 +437,7 @@
 }
 
 .vp-review-score {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 30px;
   font-weight: 800;
   line-height: 1;
@@ -526,7 +526,7 @@
 .vp-filter-active {
   background: #00a7e5;
   border-color: #00a7e5;
-  color: #ffffff;
+  color: #cccccc;
   font-weight: 700;
 }
 
@@ -568,7 +568,7 @@
 }
 
 .vp-review-name {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 13px;
   font-weight: 700;
 }
@@ -626,7 +626,7 @@
   width: 100%;
   background: #0e0e0e;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -657,7 +657,7 @@
   gap: 8px;
   background: #00a7e5;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
@@ -718,7 +718,7 @@
 }
 
 .vp-share-title {
-  color: #ffffff;
+  color: #cccccc;
   font-size: 14px;
   font-weight: 700;
   margin: 0 0 8px 0;
@@ -731,7 +731,7 @@
   gap: 12px;
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   font-family: inherit;
   font-size: 13px;
   padding: 12px 4px;
