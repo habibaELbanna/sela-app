@@ -20,27 +20,12 @@ import SearchFilters from './pages/SearchFilters/SearchFilters'
 import MyProposals from './pages/MyProposals/MyProposals'
 import MyNeeds from './pages/MyNeeds/MyNeeds'
 import { ToastProvider } from './components/Toast/Toast'
+import './App.css'
 
 const App = () => {
   return (
-    <div
-      style={{
-        background: '#0e0e0e',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <div
-        style={{
-          position: 'relative',
-          width: '390px',
-          height: '810px',
-          background: '#0e0e0e',
-          overflow: 'hidden',
-        }}
-      >
+    <div className='app-outer'>
+      <div className='app-canvas'>
         <ToastProvider>
           <BrowserRouter>
             <Routes>
