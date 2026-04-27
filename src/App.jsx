@@ -20,6 +20,7 @@ import SearchFilters from './pages/SearchFilters/SearchFilters'
 import MyProposals from './pages/MyProposals/MyProposals'
 import MyNeeds from './pages/MyNeeds/MyNeeds'
 import { ToastProvider } from './components/Toast/Toast'
+import QualityCheck from './pages/QualityCheck/QualityCheck'
 import './App.css'
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
               <Route path='/search' element={<SearchFilters />} />
               <Route path='/my-proposals' element={<MyProposals />} />
               <Route path='/my-needs' element={<MyNeeds />} />
+              <Route path='/quality-check/:id' element={<QualityCheck />} />
             </Routes>
           </BrowserRouter>
         </ToastProvider>
