@@ -450,3 +450,368 @@
     height: 24px;
   }
 }
+
+/* ============================================
+   SCENE 4 — Pre-AR Prompt + Post-AR Action Sheet + Toast
+   ============================================ */
+
+.ari-pre-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: ari-fade-in 0.3s ease;
+}
+
+@keyframes ari-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ari-pre-sheet {
+  background: #0e0e0e;
+  border: 1px solid rgba(0, 167, 229, 0.3);
+  width: 90%;
+  max-width: 360px;
+  padding: 28px 24px;
+  position: relative;
+  animation: ari-pre-slide 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes ari-pre-slide {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.ari-pre-icon-wrap {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background: rgba(0, 167, 229, 0.1);
+  border: 1px solid rgba(0, 167, 229, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.ari-pre-icon-pulse {
+  position: absolute;
+  inset: -4px;
+  border: 2px solid #00a7e5;
+  animation: ari-pulse 2s ease-out infinite;
+}
+
+.ari-pre-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  text-align: center;
+}
+
+.ari-pre-sub {
+  font-size: 13px;
+  color: #b0b0b0;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.ari-pre-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid #00a7e5;
+}
+
+[dir='rtl'] .ari-pre-tips {
+  border-left: none;
+  border-right: 2px solid #00a7e5;
+}
+
+.ari-pre-tip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #d0d0d0;
+}
+
+.ari-pre-tip-num {
+  width: 22px;
+  height: 22px;
+  background: #00a7e5;
+  color: #0e0e0e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ari-pre-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ari-pre-cancel {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ari-pre-cancel:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.ari-pre-launch {
+  flex: 1.5;
+  background: #00a7e5;
+  color: #0e0e0e;
+  border: none;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.ari-pre-launch:hover {
+  background: #00bcff;
+  box-shadow: 0 0 20px rgba(0, 167, 229, 0.5);
+}
+
+.ari-post-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 50;
+  animation: ari-fade-in 0.3s ease;
+}
+
+.ari-post-sheet {
+  background: #0e0e0e;
+  border-top: 1px solid rgba(0, 167, 229, 0.3);
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 20px 24px;
+  animation: ari-post-slide 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes ari-post-slide {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.ari-post-handle {
+  width: 40px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 auto 16px;
+  border-radius: 2px;
+}
+
+.ari-post-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(0, 167, 229, 0.08);
+  border: 1px solid rgba(0, 167, 229, 0.2);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #00a7e5;
+  font-weight: 500;
+}
+
+.ari-post-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 14px 0;
+}
+
+.ari-post-action {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 14px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+[dir='rtl'] .ari-post-action {
+  text-align: right;
+}
+
+.ari-post-action:hover {
+  background: rgba(0, 167, 229, 0.05);
+  border-color: rgba(0, 167, 229, 0.2);
+}
+
+.ari-post-action-primary {
+  background: rgba(0, 167, 229, 0.08);
+  border-color: rgba(0, 167, 229, 0.3);
+}
+
+.ari-post-action-primary:hover {
+  background: rgba(0, 167, 229, 0.15);
+  border-color: #00a7e5;
+}
+
+.ari-post-action-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(0, 167, 229, 0.08);
+  border: 1px solid rgba(0, 167, 229, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ari-post-action-icon-primary {
+  background: #00a7e5;
+  border-color: #00a7e5;
+}
+
+.ari-post-action-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ari-post-action-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.ari-post-action-sub {
+  font-size: 11px;
+  color: #b0b0b0;
+}
+
+.ari-post-dismiss {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #b0b0b0;
+  padding: 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: color 0.2s ease;
+}
+
+.ari-post-dismiss:hover {
+  color: #ffffff;
+}
+
+.ari-toast {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(14, 14, 14, 0.95);
+  border: 1px solid rgba(0, 167, 229, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #ffffff;
+  z-index: 60;
+  white-space: nowrap;
+  animation: ari-toast-up 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes ari-toast-up {
+  from {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   AR MODE — Floating part labels (visible only inside AR)
+   ============================================ */
+
+.ari-hotspot-ar-label {
+  display: none;
+}
+
+model-viewer[ar-status='session-started'] .ari-hotspot-ar-label,
+model-viewer[ar-status='object-placed'] .ari-hotspot-ar-label {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  margin-left: 12px;
+  background: rgba(0, 167, 229, 0.95);
+  color: #0e0e0e;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+model-viewer[ar-status='session-started'] .ari-hotspot-pulse,
+model-viewer[ar-status='object-placed'] .ari-hotspot-pulse {
+  animation: none;
+  border-color: rgba(0, 167, 229, 0.9);
+}

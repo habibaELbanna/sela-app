@@ -176,6 +176,9 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
   const [activeHotspot, setActiveHotspot] = useState(null)
   const [modelLoaded, setModelLoaded] = useState(false)
   const [panelOpen, setPanelOpen] = useState(false)
+  const [showPreAr, setShowPreAr] = useState(false)
+  const [showPostAr, setShowPostAr] = useState(false)
+  const [actionFeedback, setActionFeedback] = useState(null)
   const viewerRef = useRef(null)
 
   const config = modelConfigs[attachment?.file_url] || defaultConfig
@@ -200,10 +203,34 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
     }
   }
 
-  const handleLaunchAR = () => {
+  const handleArButtonClick = () => {
+    setShowPreAr(true)
+  }
+
+  const handleArLaunch = () => {
+    setShowPreAr(false)
     if (viewerRef.current && viewerRef.current.canActivateAR) {
       viewerRef.current.activateAR()
+      setTimeout(() => setShowPostAr(true), 1500)
+    } else {
+      setActionFeedback(
+        isAr
+          ? 'الواقع المعزز يعمل على الجوال فقط'
+          : 'AR works on mobile devices only'
+      )
+      setTimeout(() => setActionFeedback(null), 2500)
     }
+  }
+
+  const handlePostAction = (action) => {
+    const messages = {
+      save: isAr ? 'تم حفظ المنظور' : 'View saved',
+      share: isAr ? 'تمت المشاركة في الرسائل' : 'Shared to messages',
+      quote: isAr ? 'تم إرسال طلب عرض السعر' : 'Quote request sent',
+    }
+    setActionFeedback(messages[action])
+    setShowPostAr(false)
+    setTimeout(() => setActionFeedback(null), 2500)
   }
 
   const handleClosePanel = () => {
@@ -306,6 +333,9 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
               <span className='ari-hotspot-pulse' />
               <span className='ari-hotspot-dot' />
               <span className='ari-hotspot-label'>{i + 1}</span>
+              <span className='ari-hotspot-ar-label'>
+                {isAr ? h.title_ar : h.title_en}
+              </span>
             </button>
           ))}
         </model-viewer>
@@ -340,7 +370,7 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
               : 'Tap glowing points to inspect specifications'}
           </span>
         </div>
-        <button className='ari-ar-launch' onClick={handleLaunchAR}>
+        <button className='ari-ar-launch' onClick={handleArButtonClick}>
           <svg
             width='16'
             height='16'
@@ -415,6 +445,237 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
           {isAr ? 'نقاط فحص' : 'inspection points'}
         </span>
       </div>
+
+      {showPreAr && (
+        <div className='ari-pre-overlay' onClick={() => setShowPreAr(false)}>
+          <div className='ari-pre-sheet' onClick={(e) => e.stopPropagation()}>
+            <div className='ari-pre-icon-wrap'>
+              <div className='ari-pre-icon-pulse' />
+              <svg
+                width='28'
+                height='28'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='#00a7e5'
+                strokeWidth='2'
+              >
+                <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
+                <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
+              </svg>
+            </div>
+            <h3 className='ari-pre-title'>
+              {isAr ? 'استعد لتجربة الواقع المعزز' : 'Get ready for AR'}
+            </h3>
+            <p className='ari-pre-sub'>
+              {isAr
+                ? 'ضع المنتج في مساحة عملك الحقيقية'
+                : 'Place this product in your real workspace'}
+            </p>
+
+            <div className='ari-pre-tips'>
+              <div className='ari-pre-tip'>
+                <span className='ari-pre-tip-num'>1</span>
+                <span>
+                  {isAr
+                    ? 'وجّه الكاميرا نحو الأرضية'
+                    : 'Point camera toward the floor'}
+                </span>
+              </div>
+              <div className='ari-pre-tip'>
+                <span className='ari-pre-tip-num'>2</span>
+                <span>
+                  {isAr
+                    ? 'حرّك جهازك ببطء لمسح المنطقة'
+                    : 'Move slowly to scan the area'}
+                </span>
+              </div>
+              <div className='ari-pre-tip'>
+                <span className='ari-pre-tip-num'>3</span>
+                <span>
+                  {isAr
+                    ? 'انقر لوضع المنتج في مساحتك'
+                    : 'Tap to place the product'}
+                </span>
+              </div>
+            </div>
+
+            <div className='ari-pre-actions'>
+              <button
+                className='ari-pre-cancel'
+                onClick={() => setShowPreAr(false)}
+              >
+                {isAr ? 'إلغاء' : 'Cancel'}
+              </button>
+              <button className='ari-pre-launch' onClick={handleArLaunch}>
+                {isAr ? 'ابدأ التجربة' : 'Launch AR'}
+                <svg
+                  width='14'
+                  height='14'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='2'
+                >
+                  <line x1='5' y1='12' x2='19' y2='12' />
+                  <polyline points='12 5 19 12 12 19' />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showPostAr && (
+        <div className='ari-post-overlay' onClick={() => setShowPostAr(false)}>
+          <div className='ari-post-sheet' onClick={(e) => e.stopPropagation()}>
+            <div className='ari-post-handle' />
+            <div className='ari-post-success'>
+              <svg width='20' height='20' viewBox='0 0 24 24' fill='#00a7e5'>
+                <path d='M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' />
+              </svg>
+              <span>
+                {isAr
+                  ? 'تمت معاينة المنتج بنجاح'
+                  : 'Product previewed successfully'}
+              </span>
+            </div>
+            <h3 className='ari-post-title'>
+              {isAr ? 'الخطوة التالية؟' : "What's next?"}
+            </h3>
+
+            <button
+              className='ari-post-action'
+              onClick={() => handlePostAction('save')}
+            >
+              <div className='ari-post-action-icon'>
+                <svg
+                  width='18'
+                  height='18'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='#00a7e5'
+                  strokeWidth='2'
+                >
+                  <path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z' />
+                </svg>
+              </div>
+              <div className='ari-post-action-text'>
+                <span className='ari-post-action-title'>
+                  {isAr ? 'حفظ المنظور' : 'Save this view'}
+                </span>
+                <span className='ari-post-action-sub'>
+                  {isAr ? 'احتفظ به للرجوع لاحقاً' : 'Keep for later reference'}
+                </span>
+              </div>
+              <svg
+                width='14'
+                height='14'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='#6b7280'
+                strokeWidth='2'
+              >
+                <polyline
+                  points={isAr ? '15 18 9 12 15 6' : '9 18 15 12 9 6'}
+                />
+              </svg>
+            </button>
+
+            <button
+              className='ari-post-action'
+              onClick={() => handlePostAction('share')}
+            >
+              <div className='ari-post-action-icon'>
+                <svg
+                  width='18'
+                  height='18'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='#00a7e5'
+                  strokeWidth='2'
+                >
+                  <path d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' />
+                </svg>
+              </div>
+              <div className='ari-post-action-text'>
+                <span className='ari-post-action-title'>
+                  {isAr ? 'مشاركة مع الفريق' : 'Share with team'}
+                </span>
+                <span className='ari-post-action-sub'>
+                  {isAr ? 'إرسال عبر رسائل سيلا' : 'Send via SELA messages'}
+                </span>
+              </div>
+              <svg
+                width='14'
+                height='14'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='#6b7280'
+                strokeWidth='2'
+              >
+                <polyline
+                  points={isAr ? '15 18 9 12 15 6' : '9 18 15 12 9 6'}
+                />
+              </svg>
+            </button>
+
+            <button
+              className='ari-post-action ari-post-action-primary'
+              onClick={() => handlePostAction('quote')}
+            >
+              <div className='ari-post-action-icon ari-post-action-icon-primary'>
+                <svg
+                  width='18'
+                  height='18'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='#0e0e0e'
+                  strokeWidth='2'
+                >
+                  <line x1='12' y1='1' x2='12' y2='23' />
+                  <path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' />
+                </svg>
+              </div>
+              <div className='ari-post-action-text'>
+                <span className='ari-post-action-title'>
+                  {isAr ? 'طلب عرض سعر' : 'Request quote'}
+                </span>
+                <span className='ari-post-action-sub'>
+                  {isAr ? 'احصل على سعر للمنتج' : 'Get pricing for this item'}
+                </span>
+              </div>
+              <svg
+                width='14'
+                height='14'
+                viewBox='0 0 24 24'
+                fill='none'
+                stroke='#0e0e0e'
+                strokeWidth='2'
+              >
+                <polyline
+                  points={isAr ? '15 18 9 12 15 6' : '9 18 15 12 9 6'}
+                />
+              </svg>
+            </button>
+
+            <button
+              className='ari-post-dismiss'
+              onClick={() => setShowPostAr(false)}
+            >
+              {isAr ? 'تجاهل' : 'Dismiss'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {actionFeedback && (
+        <div className='ari-toast'>
+          <svg width='16' height='16' viewBox='0 0 24 24' fill='#00a7e5'>
+            <path d='M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' />
+          </svg>
+          <span>{actionFeedback}</span>
+        </div>
+      )}
     </div>
   )
 }
