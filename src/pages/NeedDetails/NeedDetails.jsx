@@ -1,56 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../supabase'
-import Preloader from '../../components/Preloader/Preloader'
+import ARInspector from './ARInspector'
 import './NeedDetails.css'
-
-const DEMO_USER_ID = 'a0000000-0000-0000-0000-000000000002'
-
-const AR_MODELS = {
-  chair: {
-    src: 'https://modelviewer.dev/assets/ShopifyModels/Chair.glb',
-    iosSrc: 'https://modelviewer.dev/assets/ShopifyModels/Chair.usdz',
-    nameEn: 'Office Chair',
-    nameAr: 'كرسي مكتب',
-  },
-  planter: {
-    src: 'https://modelviewer.dev/assets/ShopifyModels/GeoPlanter.glb',
-    iosSrc: 'https://modelviewer.dev/assets/ShopifyModels/GeoPlanter.usdz',
-    nameEn: 'Planter',
-    nameAr: 'حوض نبات',
-  },
-  mixer: {
-    src: 'https://modelviewer.dev/assets/ShopifyModels/Mixer.glb',
-    iosSrc: 'https://modelviewer.dev/assets/ShopifyModels/Mixer.usdz',
-    nameEn: 'Industrial Mixer',
-    nameAr: 'خلاط صناعي',
-  },
-  shoe: {
-    src: 'https://modelviewer.dev/assets/ShopifyModels/ToyTrain.glb',
-    iosSrc: 'https://modelviewer.dev/assets/ShopifyModels/ToyTrain.usdz',
-    nameEn: 'Product Sample',
-    nameAr: 'عينة منتج',
-  },
-  default: {
-    src: 'https://modelviewer.dev/assets/ShopifyModels/Chair.glb',
-    iosSrc: 'https://modelviewer.dev/assets/ShopifyModels/Chair.usdz',
-    nameEn: 'Product Preview',
-    nameAr: 'معاينة المنتج',
-  },
-}
-
-const pickARModel = (attachment, need) => {
-  const text =
-    `${attachment?.file_name || ''} ${need?.title_en || ''} ${need?.title_ar || ''} ${need?.categories?.name_en || ''} ${need?.description_en || ''}`.toLowerCase()
-  if (/chair|desk|office|furniture|seat|sofa|table|ergonomic/.test(text))
-    return AR_MODELS.chair
-  if (/plant|planter|decor|garden|pot|green/.test(text))
-    return AR_MODELS.planter
-  if (/mixer|machine|industrial|equipment|appliance|kitchen|blender/.test(text))
-    return AR_MODELS.mixer
-  if (/shoe|apparel|textile|fabric|clothing/.test(text)) return AR_MODELS.shoe
-  return AR_MODELS.default
-}
 
 const NeedDetails = () => {
   const { id } = useParams()
@@ -65,29 +17,9 @@ const NeedDetails = () => {
   const [saved, setSaved] = useState(false)
   const [saveAnim, setSaveAnim] = useState(false)
   const [showShare, setShowShare] = useState(false)
-  const [arModel, setArModel] = useState(null)
-  const [arReady, setArReady] = useState(false)
+  const [arInspector, setArInspector] = useState(null)
   const lang = localStorage.getItem('sela_lang') || 'en'
   const isAr = lang === 'ar'
-
-  useEffect(() => {
-    if (window.customElements && window.customElements.get('model-viewer')) {
-      setArReady(true)
-      return
-    }
-    const existing = document.querySelector('script[data-model-viewer]')
-    if (existing) {
-      existing.addEventListener('load', () => setArReady(true))
-      return
-    }
-    const s = document.createElement('script')
-    s.type = 'module'
-    s.src =
-      'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js'
-    s.dataset.modelViewer = 'true'
-    s.onload = () => setArReady(true)
-    document.head.appendChild(s)
-  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -137,30 +69,10 @@ const NeedDetails = () => {
         .limit(3)
       setSimilarNeeds(similarData || [])
 
-      const { data: savedCheck } = await supabase
-        .from('saved_items')
-        .select('id')
-        .eq('user_id', DEMO_USER_ID)
-        .eq('entity_type', 'need')
-        .eq('entity_id', parseInt(id))
-        .maybeSingle()
-      if (savedCheck) setSaved(true)
-
       setLoading(false)
     }
     fetchData()
   }, [id])
-
-  useEffect(() => {
-    if (arModel) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [arModel])
 
   const getDaysLeft = (deadline) => {
     if (!deadline) return null
@@ -189,14 +101,13 @@ const NeedDetails = () => {
   }
 
   const handleSave = async () => {
-    const newSaved = !saved
-    setSaved(newSaved)
+    setSaved(!saved)
     setSaveAnim(true)
     setTimeout(() => setSaveAnim(false), 400)
-    if (newSaved) {
+    if (!saved) {
       await supabase.from('saved_items').insert([
         {
-          user_id: DEMO_USER_ID,
+          user_id: 'a0000000-0000-0000-0000-000000000002',
           entity_type: 'need',
           entity_id: parseInt(id),
           folder_label_en: 'Saved Needs',
@@ -207,39 +118,17 @@ const NeedDetails = () => {
       await supabase
         .from('saved_items')
         .delete()
-        .eq('user_id', DEMO_USER_ID)
         .eq('entity_type', 'need')
         .eq('entity_id', parseInt(id))
     }
   }
 
-  const openAR = (attachment) => {
-    const picked = pickARModel(attachment, need)
-    setArModel({ ...picked, fileName: attachment.file_name })
-  }
-
-  const handleContactBuyer = () => {
-    if (!need || !company) return
-    const t = isAr ? need.title_ar : need.title_en
-    const cName = isAr ? company.name_ar : company.name_en
-    navigate(`/messages/new?need=${need.id}`, {
-      state: {
-        needId: need.id,
-        needTitle: t,
-        needTitleEn: need.title_en,
-        needTitleAr: need.title_ar,
-        buyerCompanyId: company.id,
-        buyerCompanyName: cName,
-        buyerCompanyNameEn: company.name_en,
-        buyerCompanyNameAr: company.name_ar,
-        buyerLogoUrl: company.logo_url,
-        buyerIsVerified: company.is_verified,
-        fromNeed: true,
-      },
-    })
-  }
-
-  if (loading) return <Preloader />
+  if (loading)
+    return (
+      <div className='nd-loading'>
+        <div className='nd-pulse' />
+      </div>
+    )
   if (!need)
     return (
       <div className='nd-loading'>
@@ -439,16 +328,8 @@ const NeedDetails = () => {
             <div className='nd-company-name-row'>
               <span className='nd-company-name'>{companyName}</span>
               {company?.is_verified && (
-                <svg width='15' height='15' viewBox='0 0 24 24' fill='none'>
-                  <circle cx='12' cy='12' r='10' fill='#00a7e5' />
-                  <path
-                    d='M8 12l3 3 5-6'
-                    stroke='#cccccc'
-                    strokeWidth='2.2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    fill='none'
-                  />
+                <svg width='15' height='15' viewBox='0 0 24 24' fill='#00a7e5'>
+                  <path d='M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' />
                 </svg>
               )}
             </div>
@@ -639,16 +520,8 @@ const NeedDetails = () => {
           </h2>
           {requirements.map((req, i) => (
             <div key={i} className='nd-requirement'>
-              <svg width='18' height='18' viewBox='0 0 24 24' fill='none'>
-                <circle cx='12' cy='12' r='10' fill='#00a7e5' />
-                <path
-                  d='M8 12l3 3 5-6'
-                  stroke='#cccccc'
-                  strokeWidth='2.2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  fill='none'
-                />
+              <svg width='16' height='16' viewBox='0 0 24 24' fill='#00a7e5'>
+                <path d='M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' />
               </svg>
               <span>{req}</span>
             </div>
@@ -735,7 +608,7 @@ const NeedDetails = () => {
                   <button
                     key={att.id}
                     className='nd-ar-btn'
-                    onClick={() => openAR(att)}
+                    onClick={() => setArInspector(att)}
                   >
                     <svg
                       width='18'
@@ -886,7 +759,10 @@ const NeedDetails = () => {
       </div>
 
       <div className='nd-contact-bar'>
-        <button className='nd-contact-btn' onClick={handleContactBuyer}>
+        <button
+          className='nd-contact-btn'
+          onClick={() => navigate('/messages')}
+        >
           <svg
             width='16'
             height='16'
@@ -928,122 +804,12 @@ const NeedDetails = () => {
         </div>
       )}
 
-      {arModel && (
-        <div className='nd-arview-overlay'>
-          <div className='nd-arview-topbar'>
-            <button
-              className='nd-arview-close'
-              onClick={() => setArModel(null)}
-            >
-              <svg
-                width='22'
-                height='22'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-              >
-                <line x1='18' y1='6' x2='6' y2='18' />
-                <line x1='6' y1='6' x2='18' y2='18' />
-              </svg>
-            </button>
-            <div className='nd-arview-titlewrap'>
-              <span className='nd-arview-title'>
-                {isAr ? arModel.nameAr : arModel.nameEn}
-              </span>
-              <span className='nd-arview-sub'>{arModel.fileName}</span>
-            </div>
-            <div style={{ width: 22 }} />
-          </div>
-
-          <div className='nd-arview-stage'>
-            {arReady ? (
-              <model-viewer
-                src={arModel.src}
-                ios-src={arModel.iosSrc}
-                alt={isAr ? arModel.nameAr : arModel.nameEn}
-                ar
-                ar-modes='webxr scene-viewer quick-look'
-                ar-scale='auto'
-                camera-controls
-                touch-action='pan-y'
-                auto-rotate
-                auto-rotate-delay='1500'
-                rotation-per-second='20deg'
-                shadow-intensity='1.2'
-                exposure='1'
-                environment-image='neutral'
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#0e0e0e',
-                  '--poster-color': '#0e0e0e',
-                }}
-              >
-                <button slot='ar-button' className='nd-arview-arbtn'>
-                  <svg
-                    width='16'
-                    height='16'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeWidth='2'
-                  >
-                    <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
-                    <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
-                    <line x1='12' y1='22.08' x2='12' y2='12' />
-                  </svg>
-                  <span>{isAr ? 'عرض في مساحتك' : 'VIEW IN YOUR SPACE'}</span>
-                </button>
-                <div slot='progress-bar' className='nd-arview-progress'>
-                  <div className='nd-arview-progress-bar' />
-                </div>
-              </model-viewer>
-            ) : (
-              <div className='nd-arview-loading'>
-                <div className='nd-pulse' />
-                <span className='nd-arview-loading-text'>
-                  {isAr ? 'جاري تحميل العارض...' : 'Loading 3D viewer...'}
-                </span>
-              </div>
-            )}
-          </div>
-
-          <div className='nd-arview-footer'>
-            <div className='nd-arview-hints'>
-              <div className='nd-arview-hint'>
-                <svg
-                  width='14'
-                  height='14'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='#00a7e5'
-                  strokeWidth='2'
-                >
-                  <path d='M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8' />
-                  <polyline points='21 3 21 8 16 8' />
-                </svg>
-                <span>{isAr ? 'اسحب للدوران' : 'Drag to rotate'}</span>
-              </div>
-              <div className='nd-arview-hint'>
-                <svg
-                  width='14'
-                  height='14'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='#00a7e5'
-                  strokeWidth='2'
-                >
-                  <circle cx='11' cy='11' r='8' />
-                  <line x1='21' y1='21' x2='16.65' y2='16.65' />
-                  <line x1='11' y1='8' x2='11' y2='14' />
-                  <line x1='8' y1='11' x2='14' y2='11' />
-                </svg>
-                <span>{isAr ? 'قرّص للتكبير' : 'Pinch to zoom'}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      {arInspector && (
+        <ARInspector
+          attachment={arInspector}
+          isAr={isAr}
+          onClose={() => setArInspector(null)}
+        />
       )}
     </div>
   )
