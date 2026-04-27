@@ -21,6 +21,7 @@ import MyProposals from './pages/MyProposals/MyProposals'
 import MyNeeds from './pages/MyNeeds/MyNeeds'
 import { ToastProvider } from './components/Toast/Toast'
 import QualityCheck from './pages/QualityCheck/QualityCheck'
+import SiteVisit from './pages/SiteVisit/SiteVisit'
 import './App.css'
 
 const App = () => {
@@ -55,6 +56,7 @@ const App = () => {
               <Route path='/my-proposals' element={<MyProposals />} />
               <Route path='/my-needs' element={<MyNeeds />} />
               <Route path='/quality-check/:id' element={<QualityCheck />} />
+              <Route path='/site-visit/:id' element={<SiteVisit />} />
             </Routes>
           </BrowserRouter>
         </ToastProvider>

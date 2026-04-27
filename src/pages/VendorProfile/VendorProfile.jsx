@@ -197,6 +197,7 @@ const VendorProfile = () => {
 
   const portfolioItems = [
     {
+      id: 1,
       title_en: 'TechHub Office',
       title_ar: 'مكتب TechHub',
       cat_en: 'Commercial',
@@ -204,10 +205,12 @@ const VendorProfile = () => {
       completed_en: 'March 2026',
       completed_ar: 'مارس 2026',
       budget: 45000,
+      hasAR: true,
       image:
         'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
     },
     {
+      id: 2,
       title_en: 'Luxury Villa Construct',
       title_ar: 'فيلا فاخرة',
       cat_en: 'Residential',
@@ -215,10 +218,12 @@ const VendorProfile = () => {
       completed_en: 'February 2026',
       completed_ar: 'فبراير 2026',
       budget: 120000,
+      hasAR: false,
       image:
         'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&h=300&fit=crop',
     },
     {
+      id: 3,
       title_en: 'Restaurant Fit-out',
       title_ar: 'تجهيز مطعم',
       cat_en: 'Commercial',
@@ -226,10 +231,12 @@ const VendorProfile = () => {
       completed_en: 'January 2026',
       completed_ar: 'يناير 2026',
       budget: 65000,
+      hasAR: false,
       image:
         'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop',
     },
     {
+      id: 4,
       title_en: 'Office Complex',
       title_ar: 'مجمع مكاتب',
       cat_en: 'Commercial',
@@ -237,6 +244,7 @@ const VendorProfile = () => {
       completed_en: 'December 2025',
       completed_ar: 'ديسمبر 2025',
       budget: 95000,
+      hasAR: false,
       image:
         'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop',
     },
@@ -740,6 +748,24 @@ const VendorProfile = () => {
                 <div key={i} className='vp-portfolio-card'>
                   <div className='vp-portfolio-img'>
                     <img src={p.image} alt={isAr ? p.title_ar : p.title_en} />
+                    {p.hasAR && (
+                      <span className='vp-portfolio-ar-tag'>
+                        <svg
+                          width='10'
+                          height='10'
+                          viewBox='0 0 24 24'
+                          fill='none'
+                          stroke='currentColor'
+                          strokeWidth='2.5'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        >
+                          <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
+                          <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
+                        </svg>
+                        AR
+                      </span>
+                    )}
                   </div>
                   <div className='vp-portfolio-body'>
                     <span className='vp-portfolio-title'>
@@ -754,6 +780,30 @@ const VendorProfile = () => {
                     <span className='vp-portfolio-meta'>
                       EGP {p.budget.toLocaleString()}
                     </span>
+                    {p.hasAR && (
+                      <button
+                        className='vp-portfolio-ar-btn'
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          navigate(`/site-visit/${p.id}`)
+                        }}
+                      >
+                        <svg
+                          width='12'
+                          height='12'
+                          viewBox='0 0 24 24'
+                          fill='none'
+                          stroke='currentColor'
+                          strokeWidth='2'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                        >
+                          <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
+                          <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
+                        </svg>
+                        {isAr ? 'زيارة افتراضية' : 'AR Site Visit'}
+                      </button>
+                    )}
                   </div>
                 </div>
               ))}
