@@ -1,15 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import './ARInspector.css'
 
-// ============================================================
-// PER-MODEL CONFIG
-// Each chair has its own default camera angle + hotspot positions.
-// To tweak a hotspot: change the position '0.0 0.0 0.0' values.
-// Format: 'x y z' in meters from model center.
-// ============================================================
 const modelConfigs = {
   '/models/office_chair.glb': {
     cameraOrbit: '0deg 80deg 2.2m',
+    cameraTarget: 'auto auto auto',
     hotspots: [
       {
         id: 'h1',
@@ -89,7 +84,8 @@ const modelConfigs = {
     ],
   },
   '/models/office_wheel_chair.glb': {
-    cameraOrbit: '-91.4deg 82.75deg 1.331m',
+    cameraOrbit: '-88.73deg 80.61deg auto',
+    cameraTarget: '0.55m 0.34m 0.95m',
     hotspots: [
       {
         id: 'h1',
@@ -166,9 +162,9 @@ const modelConfigs = {
   },
 }
 
-// Default config (fallback for any model not in the list above)
 const defaultConfig = {
   cameraOrbit: '0deg 75deg 2.5m',
+  cameraTarget: 'auto auto auto',
   hotspots: [],
 }
 
@@ -180,10 +176,12 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
   const [showPostAr, setShowPostAr] = useState(false)
   const [actionFeedback, setActionFeedback] = useState(null)
   const viewerRef = useRef(null)
+  const arViewerRef = useRef(null)
 
   const config = modelConfigs[attachment?.file_url] || defaultConfig
   const hotspots = config.hotspots
   const defaultOrbit = config.cameraOrbit
+  const defaultTarget = config.cameraTarget
 
   const handleHotspotClick = (hotspot) => {
     setActiveHotspot(hotspot)
@@ -199,7 +197,7 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
     setTimeout(() => setActiveHotspot(null), 300)
     if (viewerRef.current) {
       viewerRef.current.cameraOrbit = defaultOrbit
-      viewerRef.current.cameraTarget = 'auto auto auto'
+      viewerRef.current.cameraTarget = defaultTarget
     }
   }
 
@@ -209,8 +207,8 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
 
   const handleArLaunch = () => {
     setShowPreAr(false)
-    if (viewerRef.current && viewerRef.current.canActivateAR) {
-      viewerRef.current.activateAR()
+    if (arViewerRef.current && arViewerRef.current.canActivateAR) {
+      arViewerRef.current.activateAR()
       setTimeout(() => setShowPostAr(true), 1500)
     } else {
       setActionFeedback(
@@ -308,12 +306,11 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
           alt='3D product inspection'
           camera-controls
           camera-orbit={defaultOrbit}
+          camera-target={defaultTarget}
           interaction-prompt='none'
-          ar
-          ar-modes='webxr scene-viewer quick-look'
           shadow-intensity='1'
-          exposure='1'
-          environment-image='neutral'
+          exposure='0.85'
+          environment-image='legacy'
           style={{
             width: '100%',
             height: '100%',
@@ -333,7 +330,41 @@ const ARInspector = ({ attachment, onClose, isAr }) => {
               <span className='ari-hotspot-pulse' />
               <span className='ari-hotspot-dot' />
               <span className='ari-hotspot-label'>{i + 1}</span>
-              <span className='ari-hotspot-ar-label'>
+            </button>
+          ))}
+        </model-viewer>
+
+        <model-viewer
+          ref={arViewerRef}
+          src={attachment?.file_url}
+          alt='AR launcher'
+          ar
+          ar-modes='webxr scene-viewer quick-look'
+          ar-scale='auto'
+          shadow-intensity='1'
+          exposure='0.85'
+          environment-image='legacy'
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '1px',
+            height: '1px',
+            opacity: 0,
+            pointerEvents: 'none',
+          }}
+        >
+          {hotspots.map((h, i) => (
+            <button
+              key={h.id}
+              slot={`hotspot-ar-${i + 1}`}
+              data-position={h.position}
+              data-normal={h.normal}
+              data-visibility-attribute='visible'
+              className='ari-hotspot-ar'
+            >
+              <span className='ari-hotspot-ar-num'>{i + 1}</span>
+              <span className='ari-hotspot-ar-text'>
                 {isAr ? h.title_ar : h.title_en}
               </span>
             </button>

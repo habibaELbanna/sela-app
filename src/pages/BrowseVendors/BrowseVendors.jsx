@@ -90,9 +90,10 @@ const BrowseVendors = () => {
         }
       })
 
-      vendorsList.forEach((v) => {
+      vendorsList.forEach((v, idx) => {
         if (scoresMap[v.id] === undefined) {
-          scoresMap[v.id] = 70 + Math.floor(Math.random() * 25)
+          const demoScores = [97, 92, 88, 82, 76, 71, 65, 58, 45]
+          scoresMap[v.id] = demoScores[idx % demoScores.length]
         }
       })
 
@@ -112,6 +113,13 @@ const BrowseVendors = () => {
     }
     fetchData()
   }, [])
+
+  const getMatchColorClass = (score) => {
+    if (score >= 90) return 'bv-match-excellent'
+    if (score >= 75) return 'bv-match-strong'
+    if (score >= 60) return 'bv-match-okay'
+    return 'bv-match-weak'
+  }
 
   const handleSave = async (e, vendorId) => {
     e.stopPropagation()
@@ -421,7 +429,7 @@ const BrowseVendors = () => {
                             <circle cx='12' cy='12' r='10' fill='#00a7e5' />
                             <path
                               d='M8 12l3 3 5-6'
-                              stroke='#cccccc'
+                              stroke='#ffffff'
                               strokeWidth='2.2'
                               strokeLinecap='round'
                               strokeLinejoin='round'
@@ -451,7 +459,7 @@ const BrowseVendors = () => {
                   </div>
                   {score !== undefined && (
                     <button
-                      className='bv-match-badge'
+                      className={`bv-match-badge ${getMatchColorClass(score)}`}
                       onClick={(e) => handleOpenMatch(e, vendor)}
                       aria-label={`Why ${score}% match`}
                     >

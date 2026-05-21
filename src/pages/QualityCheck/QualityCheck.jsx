@@ -379,10 +379,9 @@ const QualityCheck = () => {
           alt='AR launcher with comparison indicators'
           ar
           ar-modes='webxr scene-viewer quick-look'
-          camera-orbit='0deg 80deg 2.2m'
+          ar-scale='auto'
           shadow-intensity='1'
           exposure='1'
-          environment-image='neutral'
           style={{
             position: 'absolute',
             top: 0,

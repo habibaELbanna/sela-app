@@ -159,7 +159,7 @@
 .bv-filter-active {
   background: #00a7e5;
   border-color: #00a7e5;
-  color: #cccccc;
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -281,13 +281,44 @@
 }
 
 .bv-match-badge {
-  background: #00a7e5;
-  color: #cccccc;
+  color: #ffffff;
   font-size: 13px;
   font-weight: 700;
   padding: 4px 10px;
   flex-shrink: 0;
   align-self: flex-start;
+  font-family: inherit;
+  cursor: pointer;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.15s ease;
+}
+
+.bv-match-badge:active,
+.bv-match-badge:focus {
+  outline: 0;
+  opacity: 0.88;
+}
+
+.bv-match-excellent {
+  background: #10b981;
+}
+
+.bv-match-strong {
+  background: #00a7e5;
+}
+
+.bv-match-okay {
+  background: #ffa500;
+}
+
+.bv-match-weak {
+  background: #6b7280;
 }
 
 .bv-category-tag {
@@ -385,6 +416,7 @@
 .bv-action-view {
   background: #00a7e5;
   border-color: #00a7e5;
+  color: #ffffff;
 }
 
 @keyframes bv-save-pop {
